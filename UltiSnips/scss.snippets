@@ -1,0 +1,27 @@
+priority -50
+
+snippet imp "@import" b
+@import '${1:file}';
+endsnippet
+
+snippet inc "@include" b
+@include ${1:function}(${2:arguments});
+endsnippet
+
+snippet ext "@extend %placeholder;" b
+@extend %${1:placeholder};
+endsnippet
+
+snippet mix "@mixin (...) { ... }" b
+@mixin ${1:name}(${2:arguments}) {
+	${VISUAL}$0
+}
+endsnippet
+
+snippet bbox "border-box" b
+-moz-box-sizing:border-box;
+-webkit-box-sizing:border-box;
+box-sizing:border-box;
+endsnippet
+
+
