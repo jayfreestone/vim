@@ -63,7 +63,7 @@ nmap <silent> <c-l> :wincmd l<CR>
   autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
   autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 
-map <C-d> :NERDTreeToggle<CR>
+map <C-d> :vsplit.<CR>
 
 execute pathogen#infect()
 syntax on
