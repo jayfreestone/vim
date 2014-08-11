@@ -64,3 +64,9 @@
 [submodule "bundle/neocomplete"]
 	path = bundle/neocomplete
 	url = https://github.com/Shougo/neocomplete.vim.git
+[submodule "bundle/vinegar"]
+	path = bundle/vinegar
+	url = https://github.com/tpope/vim-vinegar.git
+[submodule "bundle/obsession"]
+	path = bundle/obsession
+	url = https://github.com/tpope/vim-obsession.git
