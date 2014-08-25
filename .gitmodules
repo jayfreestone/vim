@@ -67,3 +67,6 @@
 [submodule "bundle/markdown"]
 	path = bundle/markdown
 	url = https://github.com/plasticboy/vim-markdown.git
+[submodule "bundle/php-html"]
+	path = bundle/php-html
+	url = https://github.com/captbaritone/better-indent-support-for-php-with-html
