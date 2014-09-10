@@ -64,6 +64,9 @@
 [submodule "bundle/obsession"]
 	path = bundle/obsession
 	url = https://github.com/tpope/vim-obsession.git
+[submodule "bundle/xml-vim"]
+	path = bundle/xml-vim
+	url = https://github.com/othree/xml.vim.git
 [submodule "bundle/markdown"]
 	path = bundle/markdown
 	url = https://github.com/plasticboy/vim-markdown.git
@@ -73,3 +76,6 @@
 [submodule "bundle/vimpasta"]
 	path = bundle/vimpasta
 	url = https://github.com/sickill/vim-pasta.git
+[submodule "bundle/vim-indentLine"]
+	path = bundle/vim-indentLine
+	url = https://github.com/Yggdroot/indentLine
