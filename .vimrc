@@ -79,7 +79,7 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 " syntastic
 let g:syntastic_auto_loc_list=1
-let g:syntastic_disabled_filetypes=['html', 'liquid']
+let g:syntastic_disabled_filetypes=['html', 'liquid', 'sass', 'scss', 'css']
 let g:syntastic_check_on_open=0
 let g:syntastic_enable_signs=1
 " ignore syntastic errors temporarily
