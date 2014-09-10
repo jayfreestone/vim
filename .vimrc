@@ -10,7 +10,6 @@ set smartindent
 set autoindent
 set shiftwidth=2
 set expandtab
-
 set nobackup
 set nowritebackup
 set noswapfile
@@ -143,7 +142,7 @@ let g:neocomplete#sources#syntax#min_keyword_length = 3
 "   "return pumvisible() ? neocomplete#close_popup() : "\<CR>"
 " endfunction
 " " <TAB>: completion.
-" inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 " " <C-h>, <BS>: close popup and delete backword char.
 " inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
 " inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
