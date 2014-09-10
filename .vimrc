@@ -11,6 +11,8 @@ set autoindent
 set shiftwidth=2
 set expandtab
 
+set nobackup
+set nowritebackup
 set noswapfile
 
 set hlsearch
