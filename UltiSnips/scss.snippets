@@ -18,6 +18,12 @@ snippet mix "@mixin (...) { ... }" b
 }
 endsnippet
 
+snippet bp "Breakpoint" b
+@include breakpoint(${1:arguments}) {
+	${VISUAL}$0
+}
+endsnippet
+
 snippet bbox "border-box" b
 -moz-box-sizing:border-box;
 -webkit-box-sizing:border-box;
