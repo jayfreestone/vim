@@ -1,4 +1,5 @@
 bundle/YouCompleteMe
+.cache/
 sessions/*
 colors/*
 .DS_Store
