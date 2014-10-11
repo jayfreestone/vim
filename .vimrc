@@ -73,16 +73,11 @@ vnoremap <silent> y y`]
 vnoremap <silent> p p`]
 nnoremap <silent> p p`]
 
-"Make Ctrl-P plugin a lot faster for Git projects
-let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
-let g:ctrlp_use_caching = 0
 
 map cl <Plug>(easymotion-bd-f)
 let g:EasyMotion_smartcase=1
 
 autocmd BufRead,BufNewFile *.css,*.scss,*.less setlocal foldmethod=marker foldmarker={,}
-
-let g:ctrlp_extensions = ['symbol']
 
 "Neocomplete
 "
@@ -188,3 +183,58 @@ endfu
 com! WP call WordProcessorMode()
 
 let g:indentLine_faster = 1
+
+"Unite
+call unite#custom_source('file_rec,file_rec/async,file_mru,file,buffer,grep',
+      \ 'ignore_pattern', join([
+      \ '\.git/',
+      \ '\.sass-cache/',
+      \ '\craft/app/',
+      \ '\craft/plugins/',
+      \ '\craft/storage/',
+      \ 'bower_components/',
+      \ ], '\|'))
+call unite#filters#matcher_default#use(['matcher_fuzzy'])
+call unite#filters#sorter_default#use(['sorter_rank'])
+"call unite#custom#source('file_rec/async','sorters','sorter_rank', )
+" replacing unite with ctrl-p
+let g:unite_data_directory='~/.vim/.cache/unite'
+let g:unite_enable_start_insert=1
+let g:unite_source_history_yank_enable=1
+let g:unite_prompt='» '
+let g:unite_split_rule = 'botright'
+if executable('ag')
+let g:unite_source_grep_command='ag'
+let g:unite_source_grep_default_opts='--nocolor --nogroup -S -C4'
+let g:unite_source_grep_recursive_opt=''
+let g:unite_winheight = 10
+let g:unite_force_overwrite_statusline = 0
+endif
+nnoremap <C-P> :<C-u>Unite  -buffer-name=files   -start-insert buffer file_rec/async:!<cr>
+
+" Custom mappings for the unite buffer
+autocmd FileType unite call s:unite_settings()
+function! s:unite_settings()
+  " Play nice with supertab
+  let b:SuperTabDisabled=1
+  " Enable navigation with control-j and control-k in insert mode
+  imap <buffer> <C-j>   <Plug>(unite_select_next_line)
+  imap <buffer> <C-k>   <Plug>(unite_select_previous_line)
+  imap <silent><buffer><expr> <C-x> unite#do_action('split')
+  imap <silent><buffer><expr> <C-v> unite#do_action('vsplit')
+  imap <silent><buffer><expr> <C-t> unite#do_action('tabopen')
+endfunction
+
+
+nnoremap <leader>y :Unite history/yank<cr>
+nnoremap <leader>g :Unite -quick-match buffer<cr>
+nnoremap <space>/ :Unite grep:.<cr>
+
+" Bufferline in statusline
+let g:bufferline_echo = 0
+autocmd VimEnter *
+  \ let &statusline='%{bufferline#refresh_status()}'
+    \ .bufferline#get_status_string()
+
+" Pasta like paste
+nnoremap <leader>p p`[v`]=
