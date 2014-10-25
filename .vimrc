@@ -24,8 +24,6 @@ set foldnestmax=10      "deepest fold is 10 levels
 set nofoldenable        "dont fold by default
 set foldlevel=1         "this is just what i use
 
-
-
 "nmap <C-/> <leader>c<Space>
 "vmap <C-/> <leader>c<Space>
 "
@@ -184,57 +182,55 @@ com! WP call WordProcessorMode()
 
 let g:indentLine_faster = 1
 
-"Unite
-call unite#custom_source('file_rec,file_rec/async,file_mru,file,buffer,grep',
-      \ 'ignore_pattern', join([
-      \ '\.git/',
-      \ '\.sass-cache/',
-      \ '\craft/app/',
-      \ '\craft/plugins/',
-      \ '\craft/storage/',
-      \ 'bower_components/',
-      \ ], '\|'))
-call unite#filters#matcher_default#use(['matcher_fuzzy'])
-call unite#filters#sorter_default#use(['sorter_rank'])
-"call unite#custom#source('file_rec/async','sorters','sorter_rank', )
-" replacing unite with ctrl-p
-let g:unite_data_directory='~/.vim/.cache/unite'
-let g:unite_enable_start_insert=1
-let g:unite_source_history_yank_enable=1
-let g:unite_prompt='» '
-let g:unite_split_rule = 'botright'
-if executable('ag')
-let g:unite_source_grep_command='ag'
-let g:unite_source_grep_default_opts='--nocolor --nogroup -S -C4'
-let g:unite_source_grep_recursive_opt=''
-let g:unite_winheight = 10
-let g:unite_force_overwrite_statusline = 0
-endif
-nnoremap <C-P> :<C-u>Unite  -buffer-name=files   -start-insert buffer file_rec/async:!<cr>
-
-" Custom mappings for the unite buffer
-autocmd FileType unite call s:unite_settings()
-function! s:unite_settings()
-  " Play nice with supertab
-  let b:SuperTabDisabled=1
-  " Enable navigation with control-j and control-k in insert mode
-  imap <buffer> <C-j>   <Plug>(unite_select_next_line)
-  imap <buffer> <C-k>   <Plug>(unite_select_previous_line)
-  imap <silent><buffer><expr> <C-x> unite#do_action('split')
-  imap <silent><buffer><expr> <C-v> unite#do_action('vsplit')
-  imap <silent><buffer><expr> <C-t> unite#do_action('tabopen')
-endfunction
-
-
-nnoremap <leader>y :Unite history/yank<cr>
-nnoremap <leader>g :Unite -quick-match buffer<cr>
-nnoremap <space>/ :Unite grep:.<cr>
-
-" Bufferline in statusline
-let g:bufferline_echo = 0
-autocmd VimEnter *
-  \ let &statusline='%{bufferline#refresh_status()}'
-    \ .bufferline#get_status_string()
-
 " Pasta like paste
 nnoremap <leader>p p`[v`]=
+
+
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
+
+" Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
+if executable('ag')
+  " Use Ag over Grep
+  set grepprg=ag\ --nogroup\ --nocolor
+
+  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+endif
+
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/](doc|tmp|node_modules|app|plugins|bower_components)',
+  \ 'file': '\v\.(exe|so|dll)$',
+  \ }
+
+set encoding=utf-8
+
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_powerline_fonts = 1
+
+  let g:airline_theme             = 'powerlineish'
+let g:airline_enable_branch     = 1
+let g:airline_enable_syntastic  = 1
+
+" vim-powerline symbols
+let g:airline_left_sep          = '⮀'
+let g:airline_left_alt_sep      = '⮁'
+let g:airline_right_sep         = '⮂'
+let g:airline_right_alt_sep     = '⮃'
+let g:airline_branch_prefix     = '⭠'
+let g:airline_readonly_symbol   = '⭤'
+let g:airline_linecolumn_prefix = '⭡'
+
+" let g:syntastic_warning_symbol = '∆'
+" let g:syntastic_error_symbol = ''
+
+let g:syntastic_quiet_messages = { "type": "style" }
+" Fancy syntastic error/warning symbols
+let g:syntastic_error_symbol='✗'
+let g:syntastic_warning_symbol='⚠'
+" Limit syntastic location list window height
+let g:syntastic_loc_list_height=4
+
+:highlight SignColumn guibg=#505357
+:set laststatus=2
+let g:airline#extensions#tabline#fnamemod = ':t'
