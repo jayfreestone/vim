@@ -86,10 +86,6 @@
 	path = bundle/php-html
 	url = https://github.com/captbaritone/better-indent-support-for-php-with-html
   ignore = dirty
-[submodule "bundle/vim-indentLine"]
-	path = bundle/vim-indentLine
-	url = https://github.com/Yggdroot/indentLine
-  ignore = dirty
 [submodule "bundle/neomru"]
 	path = bundle/neomru
 	url = https://github.com/Shougo/neomru.vim
@@ -105,9 +101,6 @@
 [submodule "bundle/vim-ctrlp"]
 	path = bundle/vim-ctrlp
 	url = https://github.com/kien/ctrlp.vim.git
-[submodule "bundle/flatlandia"]
-	path = bundle/flatlandia
-	url = https://github.com/jordwalke/flatlandia
 [submodule "bundle/vim-airline"]
 	path = bundle/vim-airline
 	url = https://github.com/bling/vim-airline
