@@ -206,28 +206,28 @@ let g:ctrlp_custom_ignore = {
 set encoding=utf-8
 
 let g:airline#extensions#tabline#enabled = 1
-let g:airline_powerline_fonts = 1
+" let g:airline_powerline_fonts = 1
 
-  let g:airline_theme             = 'powerlineish'
+" let g:airline_theme             = 'powerlineish'
 let g:airline_enable_branch     = 1
 let g:airline_enable_syntastic  = 1
 
 " vim-powerline symbols
-let g:airline_left_sep          = '⮀'
-let g:airline_left_alt_sep      = '⮁'
-let g:airline_right_sep         = '⮂'
-let g:airline_right_alt_sep     = '⮃'
-let g:airline_branch_prefix     = '⭠'
-let g:airline_readonly_symbol   = '⭤'
-let g:airline_linecolumn_prefix = '⭡'
+" let g:airline_left_sep          = '⮀'
+" let g:airline_left_alt_sep      = '⮁'
+" let g:airline_right_sep         = '⮂'
+" let g:airline_right_alt_sep     = '⮃'
+" let g:airline_branch_prefix     = '⭠'
+" let g:airline_readonly_symbol   = '⭤'
+" let g:airline_linecolumn_prefix = '⭡'
 
-" let g:syntastic_warning_symbol = '∆'
-" let g:syntastic_error_symbol = ''
+let g:syntastic_warning_symbol = '∆'
+let g:syntastic_error_symbol = ''
 
 let g:syntastic_quiet_messages = { "type": "style" }
 " Fancy syntastic error/warning symbols
-let g:syntastic_error_symbol='✗'
-let g:syntastic_warning_symbol='⚠'
+" let g:syntastic_error_symbol='✗'
+" let g:syntastic_warning_symbol='⚠'
 " Limit syntastic location list window height
 let g:syntastic_loc_list_height=4
 
