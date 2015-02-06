@@ -1,4 +1,5 @@
 set shortmess+=I
+:imap jk <Esc>
 
 let mapleader=","
 set nowrap
