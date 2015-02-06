@@ -1,5 +1,4 @@
 set shortmess+=I
-:imap jk <Esc>
 
 let mapleader=","
 set nowrap
@@ -25,9 +24,6 @@ set foldnestmax=10      "deepest fold is 10 levels
 set nofoldenable        "dont fold by default
 set foldlevel=1         "this is just what i use
 
-"nmap <C-/> <leader>c<Space>
-"vmap <C-/> <leader>c<Space>
-"
 "" Use ctrl-[hjkl] to select the active split!
 nmap <silent> <c-k> :wincmd k<CR>                                                                                                                       
 nmap <silent> <c-j> :wincmd j<CR>                                                                                                                       
@@ -39,16 +35,6 @@ map <C-d> :vsplit.<CR>
 execute pathogen#infect()
 syntax on
 filetype plugin indent on
-
-" let g:session_autosave = 'yes'
-" let g:session_autoload = 'yes'
-
-" Track the engine.
-"Plugin 'bundle/ultisnips'
-"let g:UltiSnipsSnippetsDir="~/.vim/bundle/ultisnips/UltiSnips"
-
-" Snippets are separated from the engine. Add this if you want them:
-"Plugin 'honza/vim-snippets'
 
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 let g:UltiSnipsExpandTrigger="<C-E>"
@@ -199,10 +185,7 @@ if executable('ag')
   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 endif
 
-let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/](doc|tmp|node_modules|app|plugins|bower_components)',
-  \ 'file': '\v\.(exe|so|dll)$',
-  \ }
+
 
 set encoding=utf-8
 
