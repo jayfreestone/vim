@@ -107,3 +107,6 @@
 [submodule "bundle/mustache"]
 	path = bundle/mustache
 	url = git://github.com/mustache/vim-mustache-handlebars.git
+[submodule "bundle/peekaboo"]
+	path = bundle/peekaboo
+	url = https://github.com/junegunn/vim-peekaboo.git

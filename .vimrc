@@ -218,3 +218,5 @@ let g:syntastic_loc_list_height=4
 :highlight SignColumn guibg=#505357
 :set laststatus=2
 let g:airline#extensions#tabline#fnamemod = ':t'
+
+let g:peekaboo_window = 'vertical botright 30new'
