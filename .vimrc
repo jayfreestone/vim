@@ -22,6 +22,7 @@ let delimitMate_expand_cr = 1
 " set foldmethod=indent   "fold based on indent
 " set foldnestmax=10      "deepest fold is 10 levels
 set nofoldenable        "dont fold by default
+set foldcolumn=1
 " set foldlevel=1         "this is just what i use
 
 "" Use ctrl-[hjkl] to select the active split!
