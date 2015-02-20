@@ -37,11 +37,6 @@ execute pathogen#infect()
 syntax on
 filetype plugin indent on
 
-" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-" let g:UltiSnipsExpandTrigger="<C-E>"
-" let g:UltiSnipsJumpForwardTrigger="<c-b>"
-" let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-
 " syntastic
 let g:syntastic_auto_loc_list=1
 let g:syntastic_disabled_filetypes=['html', 'liquid', 'sass', 'scss', 'css']
@@ -186,8 +181,6 @@ if executable('ag')
   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 endif
 
-
-
 set encoding=utf-8
 
 let g:airline#extensions#tabline#enabled = 1
@@ -197,23 +190,10 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline_enable_branch     = 1
 let g:airline_enable_syntastic  = 1
 
-" vim-powerline symbols
-" let g:airline_left_sep          = '⮀'
-" let g:airline_left_alt_sep      = '⮁'
-" let g:airline_right_sep         = '⮂'
-" let g:airline_right_alt_sep     = '⮃'
-" let g:airline_branch_prefix     = '⭠'
-" let g:airline_readonly_symbol   = '⭤'
-" let g:airline_linecolumn_prefix = '⭡'
-
 let g:syntastic_warning_symbol = '∆'
 let g:syntastic_error_symbol = ''
 
 let g:syntastic_quiet_messages = { "type": "style" }
-" Fancy syntastic error/warning symbols
-" let g:syntastic_error_symbol='✗'
-" let g:syntastic_warning_symbol='⚠'
-" Limit syntastic location list window height
 let g:syntastic_loc_list_height=4
 
 :highlight SignColumn guibg=#505357
