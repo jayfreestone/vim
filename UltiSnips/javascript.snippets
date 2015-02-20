@@ -4,6 +4,26 @@ document.addEventListener('DOMContentLoaded', function(){
 });
 endsnippet
 
+snippet jjdocred "jQuery Document Ready"
+$(document).ready(function(){
+	${0}
+});
+endsnippet
+
+snippet jjeach "jQuery forEach"
+$.each(${1:Array/Object}, function(i, ${2:value}){
+	${VISUAL}${3}
+});
+endsnippet
+
+snippet jjajax "jQuery AJAX"
+$.ajax(
+	url: "${1}"
+).done(function(){
+	${2}
+});
+endsnippet
+
 snippet ael "Add Event Listener"
 document.addEventListener(${0});
 endsnippet
