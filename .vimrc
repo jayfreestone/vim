@@ -1,4 +1,5 @@
 set shortmess+=I
+set cursorline
 
 let mapleader=","
 set nowrap
