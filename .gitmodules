@@ -42,10 +42,6 @@
 	path = bundle/delimitMate
 	url = https://github.com/Raimondi/delimitMate.git
   ignore = dirty
-[submodule "bundle/misc"]
-	path = bundle/misc
-	url = https://github.com/xolox/vim-misc.git
-  ignore = dirty
 [submodule "bundle/easymotion"]
 	path = bundle/easymotion
 	url = https://github.com/Lokaltog/vim-easymotion.git
