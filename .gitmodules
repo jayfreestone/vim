@@ -110,9 +110,6 @@
 [submodule "bundle/peekaboo"]
 	path = bundle/peekaboo
 	url = https://github.com/junegunn/vim-peekaboo.git
-[submodule "bundle/fugitive"]
-	path = bundle/fugitive
-	url = https://github.com/tpope/vim-fugitive.git
 [submodule "bundle/eunuch"]
 	path = bundle/eunuch
 	url = git@github.com:tpope/vim-eunuch.git
