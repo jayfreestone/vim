@@ -26,10 +26,6 @@
 	path = bundle/ag
 	url = https://github.com/ervandew/ag.git
   ignore = dirty
-[submodule "syntastic"]
-  ignore = dirty
-	path = syntastic
-	url = https://github.com/scrooloose/syntastic.git
 [submodule "bundle/bookmarks"]
 	path = bundle/bookmarks
 	url = https://github.com/MattesGroeger/vim-bookmarks.git
