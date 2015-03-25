@@ -18,10 +18,6 @@
 	path = bundle/phpcomplete
 	url = https://github.com/shawncplus/phpcomplete.vim.git
   ignore = dirty
-[submodule "bundle/rooter"]
-	path = bundle/rooter
-	url = https://github.com/airblade/vim-rooter.git
-  ignore = dirty
 [submodule "bundle/ag"]
 	path = bundle/ag
 	url = https://github.com/ervandew/ag.git
