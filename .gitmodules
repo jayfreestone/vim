@@ -86,9 +86,6 @@
 	path = bundle/php-html
 	url = https://github.com/captbaritone/better-indent-support-for-php-with-html
   ignore = dirty
-[submodule "bundle/neomru"]
-	path = bundle/neomru
-	url = https://github.com/Shougo/neomru.vim
 [submodule "bundle/proc"]
 	path = bundle/proc
 	url = https://github.com/Shougo/vimproc.vim
