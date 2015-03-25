@@ -110,9 +110,6 @@
 [submodule "bundle/peekaboo"]
 	path = bundle/peekaboo
 	url = https://github.com/junegunn/vim-peekaboo.git
-[submodule "bundle/eunuch"]
-	path = bundle/eunuch
-	url = git@github.com:tpope/vim-eunuch.git
 [submodule "bundle/moderncomplete"]
 	path = bundle/moderncomplete
 	url = https://github.com/jordwalke/VimCompleteLikeAModernEditor.git
