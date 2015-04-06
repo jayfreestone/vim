@@ -1,6 +1,8 @@
 set shortmess+=I
 set cursorline
 
+set relativenumber
+
 let mapleader=","
 set nowrap
 set number
