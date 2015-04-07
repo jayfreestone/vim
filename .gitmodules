@@ -94,3 +94,6 @@
 [submodule "bundle/tern"]
 	path = bundle/tern
 	url = git@github.com:marijnh/tern_for_vim.git
+[submodule "bundle/moderncompletion"]
+	path = bundle/moderncompletion
+	url = https://github.com/jordwalke/VimCompleteLikeAModernEditor.git
