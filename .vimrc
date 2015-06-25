@@ -172,4 +172,9 @@ let g:syntastic_quiet_messages = { "type": "style" }
 let g:syntastic_loc_list_height=4
 
 :highlight SignColumn guibg=#505357
-:set laststatus=2
+set laststatus=2
+set showtabline=2
+set guioptions-=e
+
+let g:tablabel =
+      \ "%N%{flagship#tabmodified()} %{flagship#tabcwds('shorten',',')}"

@@ -81,3 +81,6 @@
 [submodule "bundle/moderncompletion"]
 	path = bundle/moderncompletion
 	url = https://github.com/jordwalke/VimCompleteLikeAModernEditor.git
+[submodule "bundle/flagship"]
+	path = bundle/flagship
+	url = https://github.com/tpope/vim-flagship.git
