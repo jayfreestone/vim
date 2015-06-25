@@ -164,12 +164,6 @@ endif
 
 set encoding=utf-8
 
-let g:airline#extensions#tabline#enabled = 1
-" let g:airline_powerline_fonts = 1
-
-" let g:airline_theme             = 'powerlineish'
-let g:airline_enable_branch     = 1
-let g:airline_enable_syntastic  = 1
 
 let g:syntastic_warning_symbol = '∆'
 let g:syntastic_error_symbol = ''
@@ -179,6 +173,3 @@ let g:syntastic_loc_list_height=4
 
 :highlight SignColumn guibg=#505357
 :set laststatus=2
-let g:airline#extensions#tabline#fnamemod = ':t'
-
-let g:peekaboo_window = 'vertical botright 30new'
