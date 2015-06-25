@@ -88,9 +88,6 @@
 [submodule "bundle/peekaboo"]
 	path = bundle/peekaboo
 	url = https://github.com/junegunn/vim-peekaboo.git
-[submodule "bundle/gutentags"]
-	path = bundle/gutentags
-	url = https://github.com/ludovicchabant/vim-gutentags.git
 [submodule "bundle/tern"]
 	path = bundle/tern
 	url = git@github.com:marijnh/tern_for_vim.git
