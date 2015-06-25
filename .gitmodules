@@ -58,10 +58,6 @@
 	path = bundle/vinegar
 	url = https://github.com/tpope/vim-vinegar.git
   ignore = dirty
-[submodule "bundle/obsession"]
-	path = bundle/obsession
-	url = https://github.com/tpope/vim-obsession.git
-  ignore = dirty
 [submodule "bundle/markdown"]
 	path = bundle/markdown
 	url = https://github.com/plasticboy/vim-markdown.git
