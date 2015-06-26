@@ -110,7 +110,7 @@ let g:neocomplete#sources#omni#input_patterns.javascript= '[^. \t]\.\w*'
 
 
 " My preference with using buffers. See `:h hidden` for more details
-set hidden
+"set hidden
 
 let g:ctrlp_prompt_mappings = {
       \ 'AcceptSelection("e")': ['<c-t>'],
@@ -165,4 +165,4 @@ set showtabline=2
 set guioptions-=e
 
 let g:tablabel =
-      \ "%N%{flagship#tabmodified()} %t"
+      \ "%N%{flagship#tabmodified()} %{flagship#tabcwds('shorten',',')}"
