@@ -165,4 +165,4 @@ set showtabline=2
 set guioptions-=e
 
 let g:tablabel =
-      \ "%N%{flagship#tabmodified()} %{flagship#tabcwds('shorten',',')}"
+      \ "%N%{flagship#tabmodified()} %t"
