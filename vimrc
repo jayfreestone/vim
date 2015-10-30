@@ -30,6 +30,7 @@ Plugin 'ervandew/ag'
 Plugin 'shawncplus/phpcomplete.vim'
 Plugin 'ervandew/supertab'
 Plugin 'othree/html5.vim'
+Plugin 'Raimondi/delimitMate'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -52,10 +53,6 @@ set nobackup
 set nowritebackup
 set noswapfile
 
-" Fake indent lines on files with tab indents
-:set listchars=tab:\|\ 
-:set list
-
 " Use ctrl-[hjkl] to select the active split
 nmap <silent> <c-k> :wincmd k<CR>
 nmap <silent> <c-j> :wincmd j<CR>
@@ -71,4 +68,12 @@ set iskeyword+=-
 " Hacky implementation of 'go to class'
 map  <C-b> :Ag <C-R>=expand("<cword>")<CR> src/sass/**/*.scss<CR>
 
+" Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
+if executable('ag')
+  " Use Ag over Grep
+  set grepprg=ag\ --nogroup\ --nocolor
+
+  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+endif
 
