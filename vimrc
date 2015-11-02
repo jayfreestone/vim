@@ -31,6 +31,8 @@ Plugin 'shawncplus/phpcomplete.vim'
 Plugin 'ervandew/supertab'
 Plugin 'othree/html5.vim'
 Plugin 'jiangmiao/auto-pairs'
+" Triggers popup completion menu with SuperTab
+let g:SuperTabDefaultCompletionType = "<C-X><C-O>"
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
