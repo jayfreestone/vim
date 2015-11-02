@@ -31,6 +31,8 @@ Plugin 'shawncplus/phpcomplete.vim'
 Plugin 'ervandew/supertab'
 Plugin 'othree/html5.vim'
 Plugin 'jiangmiao/auto-pairs'
+Plugin 'terryma/vim-multiple-cursors'
+
 " Triggers popup completion menu with SuperTab
 let g:SuperTabDefaultCompletionType = "<C-X><C-O>"
 
