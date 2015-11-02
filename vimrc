@@ -31,6 +31,7 @@ Plugin 'shawncplus/phpcomplete.vim'
 Plugin 'ervandew/supertab'
 Plugin 'othree/html5.vim'
 Plugin 'Raimondi/delimitMate'
+Plugin 'jiangmiao/auto-pairs'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
