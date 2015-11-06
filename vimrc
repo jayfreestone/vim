@@ -1,6 +1,8 @@
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
+colorscheme Molokai
+
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
@@ -32,6 +34,7 @@ Plugin 'ervandew/supertab'
 Plugin 'othree/html5.vim'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'terryma/vim-multiple-cursors'
+Plugin 'tomasr/molokai'
 
 " Triggers popup completion menu with SuperTab
 let g:SuperTabDefaultCompletionType = "<C-X><C-O>"
