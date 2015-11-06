@@ -34,6 +34,7 @@ Plugin 'ervandew/supertab'
 Plugin 'othree/html5.vim'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'terryma/vim-multiple-cursors'
+Plugin 'scrooloose/syntastic'
 Plugin 'tomasr/molokai'
 
 " Triggers popup completion menu with SuperTab
@@ -84,3 +85,13 @@ if executable('ag')
   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 endif
 
+" Recommended Syntastic Settings
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 0
+let g:syntastic_check_on_wq = 0
+map <leader>s :SyntasticCheck<CR>
+let g:syntastic_quiet_messages = { "!level":  "errors" }
