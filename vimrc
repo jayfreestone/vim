@@ -22,9 +22,9 @@ Plugin 'sudar/vim-wordpress-snippets'
 Plugin 'honza/vim-snippets'
 Plugin 'mattn/emmet-vim'
 Plugin 'tpope/vim-surround'
-Plugin 'scrooloose/nerdtree'
-" Plugin 'tpope/vim-vinegar'
 Plugin 'tpope/vim-sensible'
+" Plugin 'tpope/vim-vinegar'
+Plugin 'jeetsukumaran/vim-filebeagle'
 Plugin 'captbaritone/better-indent-support-for-php-with-html'
 Plugin 'MattesGroeger/vim-bookmarks'
 Plugin 'ervandew/ag'
@@ -66,8 +66,7 @@ nmap <silent> <c-h> :wincmd h<CR>
 nmap <silent> <c-l> :wincmd l<CR>
 
 " Opens the directory listing
-"map <C-d> :vsplit.<CR>
-map <C-d> :NERDTreeToggle<CR>
+map <C-d> :FileBeagle<CR>
 
 " Considers hyphens to be part of 'words'
 set iskeyword+=-
