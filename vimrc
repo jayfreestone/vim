@@ -92,10 +92,11 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
 map <leader>s :SyntasticCheck<CR>
-let g:syntastic_php_phpcs_args="--report=csv --standard=WordPress-Extra"
+"let g:syntastic_php_phpcs_args="--report=csv --standard=WordPress-Extra"
+let g:syntastic_php_checkers=['php']
 let g:syntastic_javascript_checkers = ['jshint']
 let g:syntastic_quiet_messages = { "level": []  }
-let g:syntastic_scss_checkers = ['scss_lint']
+"let g:syntastic_scss_checkers = ['scss_lint']
 
 " Use neocomplete.
 let g:neocomplete#enable_at_startup = 1
