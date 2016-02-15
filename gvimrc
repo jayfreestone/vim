@@ -1,5 +1,6 @@
 syntax on
-set guifont=Menlo:h13
+set encoding=utf8
+set guifont=PragmataPro:h12
 colorscheme molokai
 
 set go-=T " Hide toolbar

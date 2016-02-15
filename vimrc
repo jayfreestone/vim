@@ -1,3 +1,4 @@
+set encoding=utf8
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
@@ -13,18 +14,14 @@ Plugin 'VundleVim/Vundle.vim'
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
 " plugin on GitHub repo
-Plugin 'tpope/vim-fugitive'
+Plugin 'ap/vim-buftabline'
 Plugin 'justinmk/vim-sneak'
 Plugin 'tomtom/tcomment_vim'
-Plugin 'kien/ctrlp.vim'
+Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'SirVer/ultisnips'
-Plugin 'sudar/vim-wordpress-snippets'
-Plugin 'honza/vim-snippets'
 Plugin 'mattn/emmet-vim'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-sensible'
-" Plugin 'tpope/vim-vinegar'
-Plugin 'jeetsukumaran/vim-filebeagle'
 Plugin 'captbaritone/better-indent-support-for-php-with-html'
 Plugin 'MattesGroeger/vim-bookmarks'
 Plugin 'ervandew/ag'
@@ -34,9 +31,16 @@ Plugin 'jiangmiao/auto-pairs'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'scrooloose/syntastic'
 Plugin 'tomasr/molokai'
-Plugin 'Shougo/neocomplete.vim'
 Plugin 'mxw/vim-jsx'
 Plugin 'pangloss/vim-javascript'
+Plugin 'jordwalke/AutoComplPop'
+Plugin 'jordwalke/VimCompleteLikeAModernEditor'
+Plugin 'Shougo/unite.vim'
+Plugin 'Shougo/vimfiler.vim'
+
+let g:AutoPairsMultilineClose = 0
+
+:let g:vimfiler_as_default_explorer = 1
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -59,6 +63,11 @@ set nobackup
 set nowritebackup
 set noswapfile
 
+" Buffers
+set hidden
+nnoremap <leader>l :bnext<CR>
+nnoremap <leader>h :bprev<CR>
+
 " Use ctrl-[hjkl] to select the active split
 nmap <silent> <c-k> :wincmd k<CR>
 nmap <silent> <c-j> :wincmd j<CR>
@@ -66,7 +75,8 @@ nmap <silent> <c-h> :wincmd h<CR>
 nmap <silent> <c-l> :wincmd l<CR>
 
 " Opens the directory listing
-map <C-d> :FileBeagle<CR>
+"map <C-d> :vsplit<CR>
+map <C-d> :VimFiler<CR>
 
 " Considers hyphens to be part of 'words'
 set iskeyword+=-
@@ -94,48 +104,18 @@ let g:syntastic_check_on_wq = 0
 map <leader>s :SyntasticCheck<CR>
 "let g:syntastic_php_phpcs_args="--report=csv --standard=WordPress-Extra"
 let g:syntastic_php_checkers=['php']
-let g:syntastic_javascript_checkers = ['jshint']
+let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_quiet_messages = { "level": []  }
-"let g:syntastic_scss_checkers = ['scss_lint']
-
-" Use neocomplete.
-let g:neocomplete#enable_at_startup = 1
-" Use smartcase.
-let g:neocomplete#enable_smart_case = 1
-" Set minimum syntax keyword length.
-let g:neocomplete#sources#syntax#min_keyword_length = 3
-let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
-
-" Define dictionary.
-let g:neocomplete#sources#dictionary#dictionaries = {
-    \ 'default' : '',
-    \ 'vimshell' : $HOME.'/.vimshell_hist',
-    \ 'scheme' : $HOME.'/.gosh_completions'
-        \ }
-
-" Define keyword.
-if !exists('g:neocomplete#keyword_patterns')
-    let g:neocomplete#keyword_patterns = {}
-endif
-let g:neocomplete#keyword_patterns['default'] = '\h\w*'
-
-" <TAB>: completion.
-inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
-
-let g:neocomplete#enable_auto_select = 0
-
-" Enable omni completion.
-autocmd FileType css,scss,sass setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-
-" Enable heavy omni completion.
-if !exists('g:neocomplete#sources#omni#input_patterns')
-  let g:neocomplete#sources#omni#input_patterns = {}
-endif
-let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
+" let g:syntastic_scss_checkers = ['scss_lint']
+let g:syntastic_scss_checkers = ['']
 
 " JSX Syntax Highlighting
 let g:jsx_ext_required = 0 " Allow JSX in normal JS files"
+
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+
+set cursorline
+" set relativenumber 
+" set number 
