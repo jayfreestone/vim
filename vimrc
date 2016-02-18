@@ -1,19 +1,13 @@
 set encoding=utf8
-set nocompatible              " be iMproved, required
-filetype off                  " required
+set nocompatible
+filetype off
 
-" set the runtime path to include Vundle and initialize
+" Include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
 
-" let Vundle manage Vundle, required
+" Vundle Plugins
 Plugin 'VundleVim/Vundle.vim'
-
-" The following are examples of different formats supported.
-" Keep Plugin commands between vundle#begin/end.
-" plugin on GitHub repo
 Plugin 'ap/vim-buftabline'
 Plugin 'justinmk/vim-sneak'
 Plugin 'tomtom/tcomment_vim'
@@ -37,15 +31,20 @@ Plugin 'jordwalke/AutoComplPop'
 Plugin 'jordwalke/VimCompleteLikeAModernEditor'
 Plugin 'Shougo/unite.vim'
 Plugin 'Shougo/vimfiler.vim'
+Plugin 'chip/vim-fat-finger'
 
 let g:AutoPairsMultilineClose = 0
 
+" Use VimFiler over netrw
 :let g:vimfiler_as_default_explorer = 1
+" Opens the directory listing
+map <C-d> :VimFiler<CR>
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
 
+" Vim Sneak settings
 let g:sneak#streak = 1
 
 " General Settings
@@ -62,6 +61,9 @@ set noexpandtab
 set nobackup
 set nowritebackup
 set noswapfile
+set cursorline
+set incsearch  ignorecase  smartcase
+set autowrite
 
 " Buffers
 set hidden
@@ -74,17 +76,13 @@ nmap <silent> <c-j> :wincmd j<CR>
 nmap <silent> <c-h> :wincmd h<CR>
 nmap <silent> <c-l> :wincmd l<CR>
 
-" Opens the directory listing
-"map <C-d> :vsplit<CR>
-map <C-d> :VimFiler<CR>
-
 " Considers hyphens to be part of 'words'
 set iskeyword+=-
 
-" Hacky implementation of 'go to class'
+" Hacky implementation of 'go to Sass class'
 map  <C-b> :Ag <C-R>=expand("<cword>")<CR> src/sass/**/*.scss<CR>
 
-" Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
+" Use The Silver Searcher
 if executable('ag')
   " Use Ag over Grep
   set grepprg=ag\ --nogroup\ --nocolor
@@ -93,7 +91,7 @@ if executable('ag')
   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 endif
 
-" Recommended Syntastic Settings
+" Syntastic Settings
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
@@ -103,19 +101,17 @@ let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
 map <leader>s :SyntasticCheck<CR>
 "let g:syntastic_php_phpcs_args="--report=csv --standard=WordPress-Extra"
+" let g:syntastic_scss_checkers = ['scss_lint']
 let g:syntastic_php_checkers=['php']
 let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_quiet_messages = { "level": []  }
-" let g:syntastic_scss_checkers = ['scss_lint']
 let g:syntastic_scss_checkers = ['']
 
 " JSX Syntax Highlighting
 let g:jsx_ext_required = 0 " Allow JSX in normal JS files"
 
+" UltiSnips settings
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
-set cursorline
-" set relativenumber 
-" set number 
