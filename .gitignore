@@ -1,6 +1,5 @@
 bundle/
 .cache/
 sessions/*
-colors/*
 .DS_Store
 .netrwhist
