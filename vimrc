@@ -1,55 +1,48 @@
+syntax on
+set background=dark
+let g:hybrid_custom_term_colors = 1
+colorscheme hybrid
+
+
 set encoding=utf8
 set nocompatible
 filetype off
 
-" Include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+call plug#begin('~/.vim/plugged')
 
-" Vundle Plugins
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'ap/vim-buftabline'
-Plugin 'justinmk/vim-sneak'
-Plugin 'tomtom/tcomment_vim'
-Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'SirVer/ultisnips'
-Plugin 'mattn/emmet-vim'
-Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-sensible'
-Plugin 'captbaritone/better-indent-support-for-php-with-html'
-Plugin 'MattesGroeger/vim-bookmarks'
-Plugin 'ervandew/ag'
-Plugin 'shawncplus/phpcomplete.vim'
-Plugin 'othree/html5.vim'
-Plugin 'jiangmiao/auto-pairs'
-Plugin 'terryma/vim-multiple-cursors'
-Plugin 'scrooloose/syntastic'
-Plugin 'tomasr/molokai'
-Plugin 'mxw/vim-jsx'
-Plugin 'pangloss/vim-javascript'
-Plugin 'jordwalke/AutoComplPop'
-Plugin 'jordwalke/VimCompleteLikeAModernEditor'
-Plugin 'Shougo/unite.vim'
-Plugin 'Shougo/vimfiler.vim'
-Plugin 'chip/vim-fat-finger'
+" Plugins
+Plug 'ap/vim-buftabline'
+Plug 'tomtom/tcomment_vim'
+Plug 'junegunn/fzf'
+Plug 'SirVer/ultisnips'
+Plug 'mattn/emmet-vim'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-sensible'
+Plug 'captbaritone/better-indent-support-for-php-with-html'
+Plug 'MattesGroeger/vim-bookmarks'
+Plug 'ervandew/ag'
+Plug 'shawncplus/phpcomplete.vim'
+Plug 'othree/html5.vim'
+Plug 'jiangmiao/auto-pairs'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'mxw/vim-jsx'
+Plug 'pangloss/vim-javascript'
+Plug 'tpope/vim-vinegar'
+Plug 'chip/vim-fat-finger'
+Plug 'easymotion/vim-easymotion'
 
-let g:AutoPairsMultilineClose = 0
+if has('nvim')
+	Plug 'Shougo/deoplete.nvim'
+	Plug 'benekastah/neomake'
+endif
 
-" Use VimFiler over netrw
-:let g:vimfiler_as_default_explorer = 1
-" Opens the directory listing
-map <C-d> :VimFiler<CR>
 
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
-
-" Vim Sneak settings
-let g:sneak#streak = 1
+call plug#end()
 
 " General Settings
 let mapleader=","
 set nowrap
+set lazyredraw
 set number
 set linespace=2 
 set shiftwidth=2
@@ -65,6 +58,74 @@ set cursorline
 set incsearch  ignorecase  smartcase
 set autowrite
 
+"make jj do esc"
+inoremap jj <Esc>
+
+let g:AutoPairsMultilineClose = 0
+
+" Run Neocomplete on save
+autocmd! BufWritePost,BufEnter * Neomake
+let g:neomake_open_list = 2
+let g:neomake_php_enabled_makers = ['phpcs']
+let g:neomake_php_phpcs_args_standard = 'WordPress-Core'
+
+" Handle Deoplete
+let g:deoplete#enable_at_startup = 1
+
+" Easymotion Config
+" <Leader>f{char} to move to {char}
+map  <leader>f <Plug>(easymotion-bd-f)
+nmap <leader>f <Plug>(easymotion-overwin-f)
+
+" s{char}{char} to move to {char}{char}
+nmap s <Plug>(easymotion-overwin-f2)
+
+" Move to line
+map <leader>L <Plug>(easymotion-bd-jk)
+nmap <leader>L <Plug>(easymotion-overwin-line)
+
+" Move to word
+map  <leader>w <Plug>(easymotion-bd-w)
+nmap <leader>w <Plug>(easymotion-overwin-w0)
+
+" Opens the directory listing
+map <C-d> :vsplit<CR>
+
+"map <C-p> :FZF<CR>
+
+" FZF Configuration
+if executable('fzf')
+  " FZF {{{
+  " <C-p> or <C-t> to search files
+  nnoremap <silent> <C-t> :FZF -m<cr>
+  nnoremap <silent> <C-p> :FZF -m<cr>
+
+  " <M-p> for open buffers
+  nnoremap <silent> <M-p> :Buffers<cr>
+
+  " <M-S-p> for MRU
+  nnoremap <silent> <M-S-p> :History<cr>
+
+  " Use fuzzy completion relative filepaths across directory
+  imap <expr> <c-x><c-f> fzf#vim#complete#path('git ls-files $(git rev-parse --show-toplevel)')
+
+  " Better command history with q:
+  command! CmdHist call fzf#vim#command_history({'right': '40'})
+  nnoremap q: :CmdHist<CR>
+
+  " Better search history
+  command! QHist call fzf#vim#search_history({'right': '40'})
+  nnoremap q/ :QHist<CR>
+
+  command! -bang -nargs=* Ack call fzf#vim#ag(<q-args>, {'down': '40%', 'options': --no-color'})
+  " }}}
+else
+  " CtrlP fallback
+end
+
+filetype plugin indent on    " required
+
+
 " Buffers
 set hidden
 nnoremap <leader>l :bnext<CR>
@@ -76,36 +137,22 @@ nmap <silent> <c-j> :wincmd j<CR>
 nmap <silent> <c-h> :wincmd h<CR>
 nmap <silent> <c-l> :wincmd l<CR>
 
+if has('nvim')
+     " Temporary fix for neovim/neovim#2048
+     " Shoutout to @vilhalmer for the idea for this fix
+     " https://github.com/vilhalmer/System/commit/a40ff262918a83e88fb643bad31dde3c45211bba
+     "
+     " Fix for window movement
+     nmap <bs> <C-w>h
+     " Fix for tab movement
+     nmap <C-w><bs> :tabprevious<CR>
+ endif
+
 " Considers hyphens to be part of 'words'
 set iskeyword+=-
 
 " Hacky implementation of 'go to Sass class'
 map  <C-b> :Ag <C-R>=expand("<cword>")<CR> src/sass/**/*.scss<CR>
-
-" Use The Silver Searcher
-if executable('ag')
-  " Use Ag over Grep
-  set grepprg=ag\ --nogroup\ --nocolor
-
-  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-endif
-
-" Syntastic Settings
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 0
-map <leader>s :SyntasticCheck<CR>
-"let g:syntastic_php_phpcs_args="--report=csv --standard=WordPress-Extra"
-" let g:syntastic_scss_checkers = ['scss_lint']
-let g:syntastic_php_checkers=['php']
-let g:syntastic_javascript_checkers = ['eslint']
-let g:syntastic_quiet_messages = { "level": []  }
-let g:syntastic_scss_checkers = ['']
 
 " JSX Syntax Highlighting
 let g:jsx_ext_required = 0 " Allow JSX in normal JS files"
@@ -114,4 +161,3 @@ let g:jsx_ext_required = 0 " Allow JSX in normal JS files"
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
-
