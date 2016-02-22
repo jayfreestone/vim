@@ -1,1 +1,1 @@
-/Users/jfree/.vimrc
+vimrc
