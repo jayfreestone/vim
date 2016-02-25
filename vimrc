@@ -3,7 +3,6 @@ set background=dark
 let g:hybrid_custom_term_colors = 1
 colorscheme hybrid
 
-
 set encoding=utf8
 set nocompatible
 filetype off
@@ -56,6 +55,13 @@ set noswapfile
 set cursorline
 set incsearch  ignorecase  smartcase
 set autowrite
+set autowriteall
+
+" Folding
+set foldmethod=indent   "fold based on indent
+set foldnestmax=10      "deepest fold is 10 levels
+set nofoldenable        "dont fold by default
+set foldlevel=1         "this is just what i use
 
 "make jj do esc"
 inoremap jj <Esc>
