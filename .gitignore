@@ -3,3 +3,5 @@ bundle/
 sessions/*
 .DS_Store
 .netrwhist
+.init.vim-rplugin~
+.VimballRecord
