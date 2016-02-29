@@ -37,6 +37,9 @@ endif
 
 call plug#end()
 
+" Disables Python 3 interpreter check
+let g:python3_host_skip_check = 1
+
 " General Settings
 let mapleader=","
 set nowrap
