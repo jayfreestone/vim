@@ -107,11 +107,10 @@ map <C-d> :vsplit<CR>
 if executable('fzf')
   " FZF {{{
   " <C-p> or <C-t> to search files
-  nnoremap <silent> <C-t> :FZF -m<cr>
   nnoremap <silent> <C-p> :FZF -m<cr>
 
   " <M-p> for open buffers
-  nnoremap <silent> <M-p> :Buffers<cr>
+  nnoremap <silent> <C-b> :Buffers<cr>
 
   " <M-S-p> for MRU
   nnoremap <silent> <M-S-p> :History<cr>
@@ -162,7 +161,7 @@ if has('nvim')
 set iskeyword+=-
 
 " Hacky implementation of 'go to Sass class'
-map  <C-b> :Ag <C-R>=expand("<cword>")<CR> src/sass/**/*.scss<CR>
+map  <C-t> :Ag <C-R>=expand("<cword>")<CR> src/sass/**/*.scss<CR>
 
 " JSX Syntax Highlighting
 let g:jsx_ext_required = 0 " Allow JSX in normal JS files"
