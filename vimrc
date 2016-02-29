@@ -12,7 +12,9 @@ call plug#begin('~/.vim/plugged')
 " Plugins
 Plug 'ap/vim-buftabline'
 Plug 'tomtom/tcomment_vim'
-Plug 'junegunn/fzf'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+Plug 'tpope/vim-fugitive'
 Plug 'SirVer/ultisnips'
 Plug 'mattn/emmet-vim'
 Plug 'tpope/vim-surround'
