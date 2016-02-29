@@ -39,6 +39,9 @@ endif
 
 call plug#end()
 
+" Statusline
+set statusline=%<\ %f\ %{fugitive#statusline()}
+
 " Disables Python 3 interpreter check
 let g:python3_host_skip_check = 1
 
