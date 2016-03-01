@@ -37,7 +37,6 @@ if has('nvim')
 	Plug 'benekastah/neomake'
 endif
 
-
 call plug#end()
 
 " Start EasyAlign
@@ -89,6 +88,9 @@ if has('nvim')
 
 	" Handle Deoplete
 	let g:deoplete#enable_at_startup = 1
+
+	" Use system clipboard by default
+	set clipboard+=unnamedplus
 endif
 
 
