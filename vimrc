@@ -10,6 +10,7 @@ filetype off
 call plug#begin('~/.vim/plugged')
 
 " Plugins
+Plug 'junegunn/vim-easy-align'
 Plug 'ap/vim-buftabline'
 Plug 'tomtom/tcomment_vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -38,6 +39,9 @@ endif
 
 
 call plug#end()
+
+" Start EasyAlign
+map <C-a> :EasyAlign<CR>
 
 " Statusline
 set statusline=%<\ %f\ %{fugitive#statusline()}
