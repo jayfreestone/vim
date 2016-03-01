@@ -42,9 +42,6 @@ call plug#end()
 " Statusline
 set statusline=%<\ %f\ %{fugitive#statusline()}
 
-" Disables Python 3 interpreter check
-let g:python3_host_skip_check = 1
-
 " General Settings
 let mapleader=","
 set nowrap
@@ -76,14 +73,20 @@ inoremap jj <Esc>
 
 let g:AutoPairsMultilineClose = 0
 
-" Run Neocomplete on save
-autocmd! BufWritePost,BufEnter * Neomake
-let g:neomake_open_list = 2
-let g:neomake_php_enabled_makers = ['phpcs']
-let g:neomake_php_phpcs_args_standard = 'WordPress-Core'
+if has('nvim')
+	" Disables Python 3 interpreter check
+	let g:python3_host_skip_check = 1
 
-" Handle Deoplete
-let g:deoplete#enable_at_startup = 1
+	" Run Neocomplete on save
+	autocmd! BufWritePost,BufEnter * Neomake
+	let g:neomake_open_list = 2
+	let g:neomake_php_enabled_makers = ['phpcs']
+	let g:neomake_php_phpcs_args_standard = 'WordPress-Core'
+
+	" Handle Deoplete
+	let g:deoplete#enable_at_startup = 1
+endif
+
 
 " Easymotion Config
 " <Leader>f{char} to move to {char}
@@ -96,10 +99,6 @@ nmap s <Plug>(easymotion-overwin-f2)
 " Move to line
 map <leader>L <Plug>(easymotion-bd-jk)
 nmap <leader>L <Plug>(easymotion-overwin-line)
-
-" Move to word
-map  <leader>w <Plug>(easymotion-bd-w)
-nmap <leader>w <Plug>(easymotion-overwin-w0)
 
 " Opens the directory listing
 map <C-d> :vsplit<CR>
@@ -124,10 +123,6 @@ if executable('fzf')
   " Better command history with q:
   command! CmdHist call fzf#vim#command_history({'right': '40'})
   nnoremap q: :CmdHist<CR>
-
-  " Better search history
-  command! QHist call fzf#vim#search_history({'right': '40'})
-  nnoremap q/ :QHist<CR>
 
   command! -bang -nargs=* Ack call fzf#vim#ag(<q-args>, {'down': '40%', 'options': --no-color'})
   " }}}
@@ -164,7 +159,7 @@ if has('nvim')
 set iskeyword+=-
 
 " Hacky implementation of 'go to Sass class'
-map  <C-t> :Ag <C-R>=expand("<cword>")<CR> src/sass/**/*.scss<CR>
+map  <C-t> :Ag <C-R>=expand("<cword>")<CR> src/**/**/*.scss<CR>
 
 " JSX Syntax Highlighting
 let g:jsx_ext_required = 0 " Allow JSX in normal JS files"
