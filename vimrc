@@ -1,9 +1,3 @@
-syntax on
-set background=dark
-let g:hybrid_custom_term_colors = 1
-colorscheme hybrid
-
-set encoding=utf8
 set nocompatible
 filetype off
 
@@ -31,6 +25,7 @@ Plug 'pangloss/vim-javascript'
 Plug 'tpope/vim-vinegar'
 Plug 'chip/vim-fat-finger'
 Plug 'easymotion/vim-easymotion'
+Plug 'w0ng/vim-hybrid'
 
 if has('nvim')
 	Plug 'Shougo/deoplete.nvim'
@@ -38,6 +33,33 @@ if has('nvim')
 endif
 
 call plug#end()
+
+if has('nvim')
+	" Disables Python 3 interpreter check
+	let g:python3_host_skip_check = 1
+
+	" Run Neocomplete on save
+	autocmd! BufWritePost,BufEnter * Neomake
+	let g:neomake_open_list = 2
+	let g:neomake_php_enabled_makers = ['phpcs']
+	let g:neomake_php_phpcs_args_standard = 'WordPress-Core'
+
+	" Handle Deoplete
+	let g:deoplete#enable_at_startup = 1
+
+	" Use system clipboard by default
+	set clipboard+=unnamedplus
+
+	" Enables true color
+	" let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+	" let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
+endif
+
+syntax on
+set background=dark
+colorscheme hybrid
+let g:hybrid_custom_term_colors = 1
+highlight Comment cterm=italic
 
 " Start EasyAlign
 map <C-a> :EasyAlign<CR>
@@ -77,24 +99,6 @@ nnoremap <silent> <Esc> :nohlsearch<Bar>:echo<CR>
 inoremap jj <Esc>
 
 let g:AutoPairsMultilineClose = 0
-
-if has('nvim')
-	" Disables Python 3 interpreter check
-	let g:python3_host_skip_check = 1
-
-	" Run Neocomplete on save
-	autocmd! BufWritePost,BufEnter * Neomake
-	let g:neomake_open_list = 2
-	let g:neomake_php_enabled_makers = ['phpcs']
-	let g:neomake_php_phpcs_args_standard = 'WordPress-Core'
-
-	" Handle Deoplete
-	let g:deoplete#enable_at_startup = 1
-
-	" Use system clipboard by default
-	set clipboard+=unnamedplus
-endif
-
 
 " Easymotion Config
 " <Leader>f{char} to move to {char}
@@ -176,3 +180,4 @@ let g:jsx_ext_required = 0 " Allow JSX in normal JS files"
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+
