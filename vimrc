@@ -49,8 +49,7 @@ set statusline=%<\ %f\ %{fugitive#statusline()}
 let mapleader=","
 set nowrap
 set lazyredraw
-set number
-set linespace=2 
+" set number
 set shiftwidth=2
 set tabstop=4
 set smartindent
