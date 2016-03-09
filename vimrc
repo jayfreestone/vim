@@ -90,7 +90,9 @@ set noswapfile
 set cursorline
 set incsearch  ignorecase  smartcase
 set autowrite
-set autowriteall
+
+" Look for ctags all to the way up to the root
+set tags+=tags;$HOME
 
 " Folding
 set foldmethod=indent   "fold based on indent
@@ -121,8 +123,6 @@ nmap <leader>L <Plug>(easymotion-overwin-line)
 " Opens the directory listing
 map <C-d> :vsplit<CR>
 
-"map <C-p> :FZF<CR>
-
 " FZF Configuration
 if executable('fzf')
   " FZF {{{
@@ -138,18 +138,43 @@ if executable('fzf')
   " Use fuzzy completion relative filepaths across directory
   imap <expr> <c-x><c-f> fzf#vim#complete#path('git ls-files $(git rev-parse --show-toplevel)')
 
+  " Ctag search
+  function! s:tags_sink(line)
+  let parts = split(a:line, '\t\zs')
+  let excmd = matchstr(parts[2:], '^.*\ze;"\t')
+  execute 'silent e' parts[1][:-2]
+  let [magic, &magic] = [&magic, 0]
+  execute excmd
+  let &magic = magic
+  endfunction
+
+  function! s:tags()
+  if empty(tagfiles())
+  echohl WarningMsg
+  echom 'Preparing tags'
+  echohl None
+  call system('ctags -R')
+  endif
+
+  call fzf#run({
+  \ 'source':  'cat '.join(map(tagfiles(), 'fnamemodify(v:val, ":S")')).
+  \            '| grep -v ^!',
+  \ 'options': '+m -d "\t" --with-nth 1,4.. -n 1 --tiebreak=index',
+  \ 'down':    '40%',
+  \ 'sink':    function('s:tags_sink')})
+  endfunction
+
+  command! Tags call s:tags()
+
   " Better command history with q:
   command! CmdHist call fzf#vim#command_history({'right': '40'})
   nnoremap q: :CmdHist<CR>
 
   command! -bang -nargs=* Ack call fzf#vim#ag(<q-args>, {'down': '40%', 'options': --no-color'})
   " }}}
-else
-  " CtrlP fallback
 end
 
 filetype plugin indent on    " required
-
 
 " Buffers
 set hidden
@@ -175,9 +200,6 @@ if has('nvim')
 
 " Considers hyphens to be part of 'words'
 set iskeyword+=-
-
-" Hacky implementation of 'go to Sass class'
-map  <C-t> :Ag <C-R>=expand("<cword>")<CR> src/**/**/*.scss<CR>
 
 " JSX Syntax Highlighting
 let g:jsx_ext_required = 0 " Allow JSX in normal JS files"
