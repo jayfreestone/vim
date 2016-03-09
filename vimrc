@@ -23,7 +23,6 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'mxw/vim-jsx'
 Plug 'pangloss/vim-javascript'
 Plug 'tpope/vim-vinegar'
-Plug 'chip/vim-fat-finger'
 Plug 'easymotion/vim-easymotion'
 Plug 'w0ng/vim-hybrid'
 
