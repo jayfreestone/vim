@@ -50,15 +50,23 @@ if has('nvim')
 	set clipboard+=unnamedplus
 
 	" Enables true color
-	" let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-	" let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
+	let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 endif
 
 syntax on
+
+" Sets up colorscheme
 set background=dark
 colorscheme hybrid
-let g:hybrid_custom_term_colors = 1
+
+" Chanages color of tabline
+hi TabLineFill guifg=#4C5962
+hi TabLine guifg=#4C5962
+hi TabLine guibg=#C5C8C6
+
+" Makes comments italic
 highlight Comment cterm=italic
+highlight Comment gui=italic
 
 " Start EasyAlign
 map <C-a> :EasyAlign<CR>
