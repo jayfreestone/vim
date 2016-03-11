@@ -24,6 +24,7 @@ Plug 'mxw/vim-jsx'
 Plug 'pangloss/vim-javascript'
 Plug 'tpope/vim-vinegar'
 Plug 'easymotion/vim-easymotion'
+Plug 'ternjs/tern_for_vim'
 Plug 'w0ng/vim-hybrid'
 
 if has('nvim')
@@ -209,3 +210,8 @@ let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
+" tern
+if exists('g:plugs["tern_for_vim"]')
+  let g:tern_show_signature_in_pum = 1
+  autocmd FileType javascript,jsx,javascript.jsx setlocal omnifunc=tern#Complete
+endif
