@@ -63,6 +63,9 @@ colorscheme hybrid
 hi TabLineFill guifg=#4C5962
 hi TabLine guifg=#4C5962
 hi TabLine guibg=#C5C8C6
+hi TabLineFill ctermfg=Black
+hi TabLine ctermbg=White
+hi TabLine ctermfg=0
 
 " Makes comments italic
 highlight Comment cterm=italic
