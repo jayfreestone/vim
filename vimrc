@@ -39,7 +39,8 @@ if has('nvim')
 	let g:python3_host_skip_check = 1
 
 	" Run Neocomplete on save
-	autocmd! BufWritePost,BufEnter * Neomake
+	autocmd! BufWritePost * Neomake
+	" autocmd! BufWritePost,BufEnter * Neomake
 	let g:neomake_open_list = 2
 	let g:neomake_php_enabled_makers = ['phpcs']
 	let g:neomake_php_phpcs_args_standard = 'WordPress-Core'
