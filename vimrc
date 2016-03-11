@@ -25,6 +25,7 @@ Plug 'pangloss/vim-javascript'
 Plug 'tpope/vim-vinegar'
 Plug 'easymotion/vim-easymotion'
 Plug 'ternjs/tern_for_vim'
+Plug 'dsawardekar/wordpress.vim'
 Plug 'w0ng/vim-hybrid'
 
 if has('nvim')
@@ -217,3 +218,7 @@ if exists('g:plugs["tern_for_vim"]')
   let g:tern_show_signature_in_pum = 1
   autocmd FileType javascript,jsx,javascript.jsx setlocal omnifunc=tern#Complete
 endif
+
+" Sets up relative WP path for WP Vim
+let g:wordpress_vim_wordpress_path="../../wordpress"
+
