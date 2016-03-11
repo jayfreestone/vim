@@ -28,7 +28,6 @@ Plug 'ternjs/tern_for_vim'
 Plug 'w0ng/vim-hybrid'
 
 if has('nvim')
-	Plug 'Shougo/deoplete.nvim'
 	Plug 'benekastah/neomake'
 endif
 
@@ -43,9 +42,6 @@ if has('nvim')
 	let g:neomake_open_list = 2
 	let g:neomake_php_enabled_makers = ['phpcs']
 	let g:neomake_php_phpcs_args_standard = 'WordPress-Core'
-
-	" Handle Deoplete
-	let g:deoplete#enable_at_startup = 1
 
 	" Use system clipboard by default
 	set clipboard+=unnamedplus
@@ -209,6 +205,12 @@ let g:jsx_ext_required = 0 " Allow JSX in normal JS files"
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+
+" Completion
+" Don't select first result
+set completeopt=menuone,longest
+" Don't open the scratch window 
+set completeopt-=preview
 
 " tern
 if exists('g:plugs["tern_for_vim"]')
