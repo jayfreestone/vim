@@ -1,3 +1,6 @@
+filetype plugin indent on
+syntax on
+
 " Sets up Hybrid colorscheme variables
 let g:hybrid_reduced_contrast = 1
 let g:hybrid_custom_term_colors = 1
@@ -49,10 +52,8 @@ if has('nvim')
 	set clipboard+=unnamedplus
 
 	" Enables true color
-	let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+	" let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 endif
-
-syntax on
 
 " Sets up colorscheme
 set background=dark
