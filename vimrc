@@ -218,6 +218,9 @@ let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 set completeopt=menuone,longest
 " Don't open the scratch window 
 set completeopt-=preview
+" Adds more sources for word completion
+set complete=.,w,b,u,t,i
+
 
 " tern
 if exists('g:plugs["tern_for_vim"]')
