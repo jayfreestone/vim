@@ -93,7 +93,7 @@ set nowritebackup
 set noswapfile
 set cursorline
 set incsearch  ignorecase  smartcase
-set autowrite
+" set autowrite
 
 " Look for ctags all to the way up to the root
 set tags+=tags;$HOME
@@ -107,7 +107,7 @@ set foldlevel=1         "this is just what i use
 " Ability to cancel search with escape
 nnoremap <silent> <Esc> :nohlsearch<Bar>:echo<CR>
 
-"make jj do esc"
+" Make jj do esc"
 inoremap jj <Esc>
 
 let g:AutoPairsMultilineClose = 0
@@ -139,46 +139,37 @@ if executable('fzf')
   " <M-S-p> for MRU
   nnoremap <silent> <M-S-p> :History<cr>
 
-  " Use fuzzy completion relative filepaths across directory
-  imap <expr> <c-x><c-f> fzf#vim#complete#path('git ls-files $(git rev-parse --show-toplevel)')
-
   " Ctag search
   function! s:tags_sink(line)
-  let parts = split(a:line, '\t\zs')
-  let excmd = matchstr(parts[2:], '^.*\ze;"\t')
-  execute 'silent e' parts[1][:-2]
-  let [magic, &magic] = [&magic, 0]
-  execute excmd
-  let &magic = magic
+	  let parts = split(a:line, '\t\zs')
+	  let excmd = matchstr(parts[2:], '^.*\ze;"\t')
+	  execute 'silent e' parts[1][:-2]
+	  let [magic, &magic] = [&magic, 0]
+	  execute excmd
+	  let &magic = magic
   endfunction
 
   function! s:tags()
-  if empty(tagfiles())
-  echohl WarningMsg
-  echom 'Preparing tags'
-  echohl None
-  call system('ctags -R')
-  endif
+	  if empty(tagfiles())
+		  echohl WarningMsg
+		  echom 'Preparing tags'
+		  echohl None
+		  call system('ctags -R')
+	  endif
 
-  call fzf#run({
-  \ 'source':  'cat '.join(map(tagfiles(), 'fnamemodify(v:val, ":S")')).
-  \            '| grep -v ^!',
-  \ 'options': '+m -d "\t" --with-nth 1,4.. -n 1 --tiebreak=index',
-  \ 'down':    '40%',
-  \ 'sink':    function('s:tags_sink')})
+	  call fzf#run({
+	  \ 'source':  'cat '.join(map(tagfiles(), 'fnamemodify(v:val, ":S")')).
+	  \            '| grep -v ^!',
+	  \ 'options': '+m -d "\t" --with-nth 1,4.. -n 1 --tiebreak=index',
+	  \ 'down':    '40%',
+	  \ 'sink':    function('s:tags_sink')})
   endfunction
 
   command! Tags call s:tags()
 
-  " Better command history with q:
-  command! CmdHist call fzf#vim#command_history({'right': '40'})
-  nnoremap q: :CmdHist<CR>
-
   command! -bang -nargs=* Ack call fzf#vim#ag(<q-args>, {'down': '40%', 'options': --no-color'})
   " }}}
 end
-
-filetype plugin indent on    " required
 
 " Buffers
 set hidden
@@ -222,7 +213,7 @@ set completeopt-=preview
 set complete=.,w,b,u,t,i
 
 
-" tern
+" Tern JS
 if exists('g:plugs["tern_for_vim"]')
   let g:tern_show_signature_in_pum = 1
   autocmd FileType javascript,jsx,javascript.jsx setlocal omnifunc=tern#Complete
