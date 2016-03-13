@@ -30,6 +30,7 @@ Plug 'easymotion/vim-easymotion'
 Plug 'ternjs/tern_for_vim'
 Plug 'dsawardekar/wordpress.vim'
 Plug 'w0ng/vim-hybrid'
+Plug 'ludovicchabant/vim-gutentags'
 
 if has('nvim')
 	Plug 'benekastah/neomake'
