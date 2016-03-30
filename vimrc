@@ -27,14 +27,15 @@ Plug 'mxw/vim-jsx'
 Plug 'pangloss/vim-javascript'
 Plug 'tpope/vim-vinegar'
 Plug 'easymotion/vim-easymotion'
-Plug 'ternjs/tern_for_vim'
+" Plug 'ternjs/tern_for_vim'
+Plug 'carlitux/deoplete-ternjs'
 Plug 'dsawardekar/wordpress.vim'
 Plug 'w0ng/vim-hybrid'
 Plug 'ludovicchabant/vim-gutentags'
-Plug 'guns/xterm-color-table.vim'
 
 if has('nvim')
 	Plug 'benekastah/neomake'
+	Plug 'Shougo/deoplete.nvim'
 endif
 
 call plug#end()
@@ -42,6 +43,14 @@ call plug#end()
 if has('nvim')
 	" Disables Python 3 interpreter check
 	let g:python3_host_skip_check = 1
+
+	" Use deoplete.
+	let g:deoplete#enable_at_startup = 1
+	let g:deoplete#enable_ignore_case = 'ignorecase'
+	let g:deoplete#omni_patterns = {}
+	let g:deoplete#omni_patterns.php =
+				\ '\h\w*\|[^. \t]->\%(\h\w*\)\?\|\h\w*::\%(\h\w*\)\?'
+
 
 	" Run Neocomplete on save
 	autocmd! BufWritePost * Neomake
@@ -218,13 +227,6 @@ set completeopt=menuone,longest
 set completeopt-=preview
 " Adds more sources for word completion
 set complete=.,w,b,u,t,i
-
-
-" Tern JS
-if exists('g:plugs["tern_for_vim"]')
-  let g:tern_show_signature_in_pum = 1
-  autocmd FileType javascript,jsx,javascript.jsx setlocal omnifunc=tern#Complete
-endif
 
 " Sets up relative WP path for WP Vim
 let g:wordpress_vim_wordpress_path="../../wordpress"
