@@ -91,6 +91,10 @@ highlight Comment gui=italic
 " Start EasyAlign
 map <C-a> :EasyAlign<CR>
 
+" Undo persists after closing/re-opening
+set undofile
+set undodir=~/.vim/undodir
+
 " Statusline
 set statusline=%<\ %f\ %{fugitive#statusline()}
 
