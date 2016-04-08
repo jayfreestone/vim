@@ -1,6 +1,7 @@
 bundle/
 .cache/
 sessions/*
+undodir/
 .DS_Store
 .netrwhist
 .init.vim-rplugin~
