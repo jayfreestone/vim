@@ -6,3 +6,6 @@ undodir/
 .netrwhist
 .init.vim-rplugin~
 .VimballRecord
+
+tags.lock
+tags.temp
