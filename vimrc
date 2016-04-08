@@ -27,43 +27,22 @@ Plug 'mxw/vim-jsx'
 Plug 'pangloss/vim-javascript'
 Plug 'tpope/vim-vinegar'
 Plug 'easymotion/vim-easymotion'
-" Plug 'ternjs/tern_for_vim'
-Plug 'carlitux/deoplete-ternjs'
+Plug 'ternjs/tern_for_vim'
 Plug 'dsawardekar/wordpress.vim'
 Plug 'w0ng/vim-hybrid'
 Plug 'ludovicchabant/vim-gutentags'
-
-if has('nvim')
-	Plug 'benekastah/neomake'
-	Plug 'Shougo/deoplete.nvim'
-endif
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'Valloric/YouCompleteMe'
 
 call plug#end()
 
-if has('nvim')
-	" Disables Python 3 interpreter check
-	let g:python3_host_skip_check = 1
+" Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
+if executable('ag')
+	" Use Ag over Grep
+	set grepprg=ag\ --nogroup\ --nocolor
 
-	" Use deoplete.
-	let g:deoplete#enable_at_startup = 1
-	let g:deoplete#enable_ignore_case = 'ignorecase'
-	let g:deoplete#omni_patterns = {}
-	let g:deoplete#omni_patterns.php =
-				\ '\h\w*\|[^. \t]->\%(\h\w*\)\?\|\h\w*::\%(\h\w*\)\?'
-
-
-	" Run Neocomplete on save
-	autocmd! BufWritePost * Neomake
-	" autocmd! BufWritePost,BufEnter * Neomake
-	let g:neomake_open_list = 2
-	let g:neomake_php_enabled_makers = ['phpcs']
-	let g:neomake_php_phpcs_args_standard = 'WordPress-Core'
-
-	" Use system clipboard by default
-	set clipboard+=unnamedplus
-
-	" Enables true color
-	" let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+	" Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+	let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 endif
 
 " Sets up colorscheme
@@ -188,7 +167,17 @@ if executable('fzf')
   command! Tags call s:tags()
 
   command! -bang -nargs=* Ack call fzf#vim#ag(<q-args>, {'down': '40%', 'options': --no-color'})
+  
   " }}}
+  else
+	  " Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
+	  if executable('ag')
+		  " Use Ag over Grep
+		  set grepprg=ag\ --nogroup\ --nocolor
+
+		  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+		  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+	  endif
 end
 
 " Buffers
@@ -235,3 +224,5 @@ set complete=.,w,b,u,t,i
 " Sets up relative WP path for WP Vim
 let g:wordpress_vim_wordpress_path="../../wordpress"
 
+" set omnifunc=syntaxcomplete#Complete
+" autocmd FileType javascript setlocal omnifunc=tern#Complete
