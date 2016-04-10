@@ -33,6 +33,7 @@ Plug 'w0ng/vim-hybrid'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'Valloric/YouCompleteMe'
+Plug 'scrooloose/syntastic'
 
 call plug#end()
 
@@ -44,6 +45,19 @@ if executable('ag')
 	" Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
 	let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 endif
+
+" Recommended Syntastic Settings
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 0
+let g:syntastic_check_on_wq = 0
+map <leader>s :SyntasticCheck<CR>
+let g:syntastic_php_phpcs_args="--report=csv --standard=WordPress-Extra"
+let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_quiet_messages = { "level": []  }
 
 " Sets up colorscheme
 set background=dark
@@ -223,6 +237,10 @@ set complete=.,w,b,u,t,i
 
 " Sets up relative WP path for WP Vim
 let g:wordpress_vim_wordpress_path="../../wordpress"
+
+" Go to tag support for JS methods
+" in ~/.vim/after/ftplugin/javascript.vim
+nnoremap <buffer> <C-]> :tjump /<c-r>=expand('<cword>')<CR><CR>
 
 " set omnifunc=syntaxcomplete#Complete
 " autocmd FileType javascript setlocal omnifunc=tern#Complete
