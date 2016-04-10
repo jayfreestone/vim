@@ -54,9 +54,11 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
+let g:syntastic_check_on_w = 0
 map <leader>s :SyntasticCheck<CR>
 let g:syntastic_php_phpcs_args="--report=csv --standard=WordPress-Extra"
 let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_scss_checkers = ['']
 let g:syntastic_quiet_messages = { "level": []  }
 
 " Sets up colorscheme
