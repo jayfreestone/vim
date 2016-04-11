@@ -55,6 +55,7 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
 let g:syntastic_check_on_w = 0
+map <s> <Nop>
 map <leader>s :SyntasticCheck<CR>
 let g:syntastic_php_phpcs_args="--report=csv --standard=WordPress-Extra"
 let g:syntastic_javascript_checkers = ['eslint']
@@ -133,7 +134,7 @@ map  <leader>f <Plug>(easymotion-bd-f)
 nmap <leader>f <Plug>(easymotion-overwin-f)
 
 " s{char}{char} to move to {char}{char}
-nmap s <Plug>(easymotion-overwin-f2)
+" nmap s <Plug>(easymotion-overwin-f2)
 
 " Move to line
 map <leader>L <Plug>(easymotion-bd-jk)
