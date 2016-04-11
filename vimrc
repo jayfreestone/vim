@@ -11,8 +11,6 @@ call plug#begin('~/.vim/plugged')
 Plug 'junegunn/vim-easy-align'
 Plug 'ap/vim-buftabline'
 Plug 'tomtom/tcomment_vim'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'SirVer/ultisnips'
 Plug 'mattn/emmet-vim'
@@ -143,59 +141,6 @@ nmap <leader>L <Plug>(easymotion-overwin-line)
 " Opens the directory listing
 map <C-d> :vsplit<CR>
 
-" FZF Configuration
-if executable('fzf')
-  " FZF {{{
-  " <C-p> or <C-t> to search files
-  nnoremap <silent> <C-p> :FZF -m<cr>
-
-  " <M-p> for open buffers
-  nnoremap <silent> <C-b> :Buffers<cr>
-
-  " <M-S-p> for MRU
-  nnoremap <silent> <M-S-p> :History<cr>
-
-  " Ctag search
-  function! s:tags_sink(line)
-	  let parts = split(a:line, '\t\zs')
-	  let excmd = matchstr(parts[2:], '^.*\ze;"\t')
-	  execute 'silent e' parts[1][:-2]
-	  let [magic, &magic] = [&magic, 0]
-	  execute excmd
-	  let &magic = magic
-  endfunction
-
-  function! s:tags()
-	  if empty(tagfiles())
-		  echohl WarningMsg
-		  echom 'Preparing tags'
-		  echohl None
-		  call system('ctags -R')
-	  endif
-
-	  call fzf#run({
-	  \ 'source':  'cat '.join(map(tagfiles(), 'fnamemodify(v:val, ":S")')).
-	  \            '| grep -v ^!',
-	  \ 'options': '+m -d "\t" --with-nth 1,4.. -n 1 --tiebreak=index',
-	  \ 'down':    '40%',
-	  \ 'sink':    function('s:tags_sink')})
-  endfunction
-
-  command! Tags call s:tags()
-
-  command! -bang -nargs=* Ack call fzf#vim#ag(<q-args>, {'down': '40%', 'options': --no-color'})
-  
-  " }}}
-  else
-	  " Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
-	  if executable('ag')
-		  " Use Ag over Grep
-		  set grepprg=ag\ --nogroup\ --nocolor
-
-		  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-		  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-	  endif
-end
 
 " Buffers
 set hidden
