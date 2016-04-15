@@ -32,6 +32,7 @@ Plug 'ludovicchabant/vim-gutentags'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'Valloric/YouCompleteMe'
 Plug 'scrooloose/syntastic'
+Plug 'tmhedberg/matchit'
 
 call plug#end()
 
@@ -52,9 +53,9 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
-let g:syntastic_check_on_w = 0
+let g:syntastic_mode_map = { 'mode': 'passive' }
 map <s> <Nop>
-map <leader>s :SyntasticCheck<CR>
+map <C-S> :SyntasticCheck<CR>
 let g:syntastic_php_phpcs_args="--report=csv --standard=WordPress-Extra"
 let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_scss_checkers = ['']
@@ -171,9 +172,7 @@ set iskeyword+=-
 let g:jsx_ext_required = 1 " Allow JSX in normal JS files"
 
 " UltiSnips settings
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+let g:UltiSnipsExpandTrigger="<c-j>"
 
 " Completion
 " Don't select first result
