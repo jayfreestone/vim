@@ -130,16 +130,8 @@ let g:AutoPairsMultilineClose = 0
 map  <leader>f <Plug>(easymotion-bd-f)
 nmap <leader>f <Plug>(easymotion-overwin-f)
 
-" s{char}{char} to move to {char}{char}
-" nmap s <Plug>(easymotion-overwin-f2)
-
-" Move to line
-map <leader>L <Plug>(easymotion-bd-jk)
-nmap <leader>L <Plug>(easymotion-overwin-line)
-
 " Opens the directory listing
 map <C-d> :vsplit<CR>
-
 
 " Buffers
 set hidden
@@ -175,6 +167,3 @@ let g:wordpress_vim_wordpress_path="../../wordpress"
 " Go to tag support for JS methods
 " in ~/.vim/after/ftplugin/javascript.vim
 nnoremap <buffer> <C-]> :tjump /<c-r>=expand('<cword>')<CR><CR>
-
-" set omnifunc=syntaxcomplete#Complete
-" autocmd FileType javascript setlocal omnifunc=tern#Complete
