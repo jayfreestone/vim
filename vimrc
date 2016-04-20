@@ -11,8 +11,6 @@ Plug 'tpope/vim-fugitive'
 Plug 'SirVer/ultisnips'
 Plug 'mattn/emmet-vim'
 Plug 'tpope/vim-surround'
-" Plug 'captbaritone/better-indent-support-for-php-with-html'
-" Plug 'StanAngeloff/php.vim'
 Plug 'vim-scripts/php.vim-html-enhanced'
 Plug 'MattesGroeger/vim-bookmarks'
 Plug 'ervandew/ag'
@@ -103,6 +101,7 @@ set shiftwidth=2
 set tabstop=4
 set smartindent
 set autoindent
+set sw=4
 set shiftwidth=4
 set noexpandtab
 set nobackup
