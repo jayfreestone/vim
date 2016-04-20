@@ -155,17 +155,6 @@ nmap <silent> <c-j> :wincmd j<CR>
 nmap <silent> <c-h> :wincmd h<CR>
 nmap <silent> <c-l> :wincmd l<CR>
 
-if has('nvim')
-     " Temporary fix for neovim/neovim#2048
-     " Shoutout to @vilhalmer for the idea for this fix
-     " https://github.com/vilhalmer/System/commit/a40ff262918a83e88fb643bad31dde3c45211bba
-     "
-     " Fix for window movement
-     nmap <bs> <C-w>h
-     " Fix for tab movement
-     nmap <C-w><bs> :tabprevious<CR>
- endif
-
 " Considers hyphens to be part of 'words'
 set iskeyword+=-
 
