@@ -32,6 +32,7 @@ Plug 'Valloric/YouCompleteMe'
 Plug 'scrooloose/syntastic'
 Plug 'tmhedberg/matchit'
 Plug 'NLKNguyen/papercolor-theme'
+Plug 'airblade/vim-gitgutter'
 
 call plug#end()
 
