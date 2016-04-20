@@ -120,9 +120,6 @@ set foldnestmax=10      "deepest fold is 10 levels
 set nofoldenable        "dont fold by default
 set foldlevel=1         "this is just what i use
 
-" Ability to cancel search with escape
-nnoremap <silent> <Esc> :nohlsearch<Bar>:echo<CR>
-
 " Make jj do esc"
 inoremap jj <Esc>
 
