@@ -11,7 +11,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'SirVer/ultisnips'
 Plug 'mattn/emmet-vim'
 Plug 'tpope/vim-surround'
-Plug 'vim-scripts/php.vim-html-enhanced'
+" Plug 'vim-scripts/php.vim-html-enhanced'
 Plug 'MattesGroeger/vim-bookmarks'
 Plug 'ervandew/ag'
 Plug 'shawncplus/phpcomplete.vim'
@@ -175,3 +175,8 @@ let g:wordpress_vim_wordpress_path="../../wordpress"
 " Go to tag support for JS methods
 " in ~/.vim/after/ftplugin/javascript.vim
 nnoremap <buffer> <C-]> :tjump /<c-r>=expand('<cword>')<CR><CR>
+
+" Disables all gitgutter keybindings
+let g:gitgutter_map_keys = 0
+nmap <Leader>ha <Plug>GitGutterStageHunk
+nmap <Leader>hr <Plug>GitGutterUndoHunk
