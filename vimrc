@@ -194,3 +194,9 @@ func! WordProcessorMode()
 	setlocal linebreak 
 endfu 
 com! WP call WordProcessorMode()
+
+" Conditionally enables gutentags
+if !has("ctags")
+    let g:gutentags_enabled = 0
+endif
+
