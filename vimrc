@@ -178,5 +178,19 @@ nnoremap <buffer> <C-]> :tjump /<c-r>=expand('<cword>')<CR><CR>
 
 " Disables all gitgutter keybindings
 let g:gitgutter_map_keys = 0
-nmap <Leader>ha <Plug>GitGutterStageHunk
-nmap <Leader>hr <Plug>GitGutterUndoHunk
+" nmap <Leader>ha <Plug>GitGutterStageHunk
+" nmap <Leader>hr <Plug>GitGutterUndoHunk
+
+func! WordProcessorMode() 
+	setlocal formatoptions=1 
+	setlocal noexpandtab 
+	map j gj 
+	map k gk
+	setlocal spell spelllang=en_us 
+	set thesaurus+=/Users/sbrown/.vim/thesaurus/mthesaur.txt
+	set complete+=s
+	set formatprg=par
+	setlocal wrap 
+	setlocal linebreak 
+endfu 
+com! WP call WordProcessorMode()
