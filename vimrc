@@ -31,6 +31,7 @@ Plug 'scrooloose/syntastic'
 Plug 'tmhedberg/matchit'
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'airblade/vim-gitgutter'
+Plug 'captbaritone/better-indent-support-for-php-with-html'
 
 call plug#end()
 
@@ -113,6 +114,7 @@ set sw=4
 set shiftwidth=4
 set noexpandtab
 set nobackup
+set backupcopy=no
 set nowritebackup
 set noswapfile
 set cursorline
@@ -195,8 +197,9 @@ func! WordProcessorMode()
 endfu 
 com! WP call WordProcessorMode()
 
-" Conditionally enables gutentags
-if !has("ctags")
-    let g:gutentags_enabled = 0
-endif
+"set JS jump to definition to use ternjs
+autocmd filetype javascript nmap <silent> gd :TernDef<CR>
+autocmd filetype javascript nmap <silent> gD :TernDef<CR>
 
+let g:tern_map_keys=1
+let g:tern_map_prefix = '<leader>'
