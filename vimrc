@@ -29,7 +29,7 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'Valloric/YouCompleteMe'
 Plug 'scrooloose/syntastic'
 Plug 'tmhedberg/matchit'
-Plug 'NLKNguyen/papercolor-theme'
+Plug 'joshdick/onedark.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'captbaritone/better-indent-support-for-php-with-html'
 
@@ -71,26 +71,26 @@ highlight link SyntasticWarningSign SignColumn
 highlight link SyntasticStyleErrorSign SignColumn
 highlight link SyntasticStyleWarningSign SignColumn
 
-set background=light
-colorscheme PaperColor
+set background=dark
+colorscheme onedark
 
 " Chanages color of tabline
-hi TabLineFill guifg=#4C5962
-hi TabLine guifg=#4C5962
-hi TabLine guibg=#C5C8C6
-hi TabLineFill ctermfg=8
-hi TabLine ctermbg=White
-hi TabLine ctermfg=8
-hi PmenuSel ctermfg=8
-hi PmenuSel ctermbg=White
-hi StatusLine ctermfg=7
-hi StatusLine ctermbg=White
-hi StatusLineNC ctermfg=8
-hi StatusLineNC ctermbg=White
+" hi TabLineFill guifg=#4C5962
+" hi TabLine guifg=#4C5962
+" hi TabLine guibg=#C5C8C6
+" hi TabLineFill ctermfg=8
+" hi TabLine ctermbg=White
+" hi TabLine ctermfg=8
+" hi PmenuSel ctermfg=8
+" hi PmenuSel ctermbg=White
+" hi StatusLine ctermfg=7
+" hi StatusLine ctermbg=White
+" hi StatusLineNC ctermfg=8
+" hi StatusLineNC ctermbg=White
 
 " Makes comments italic
-highlight Comment cterm=italic
-highlight Comment gui=italic
+" highlight Comment cterm=italic
+" highlight Comment gui=italic
 
 " Start EasyAlign
 map <C-a> :EasyAlign<CR>
