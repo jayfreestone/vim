@@ -30,6 +30,7 @@ Plug 'tmhedberg/matchit'
 Plug 'joshdick/onedark.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'captbaritone/better-indent-support-for-php-with-html'
+Plug 'sjl/gundo.vim/'
 
 call plug#end()
 
@@ -201,6 +202,7 @@ autocmd filetype javascript nmap <silent> gD :TernDef<CR>
 
 let g:tern_map_keys=1
 let g:tern_map_prefix = '<leader>'
+nnoremap <C-g> :GundoToggle<CR>
 " Console log from insert mode; Puts focus inside parentheses
 imap cll console.log();<Esc>==f(a
 " Console log from visual mode on next line, puts visual selection inside parentheses
