@@ -201,3 +201,9 @@ autocmd filetype javascript nmap <silent> gD :TernDef<CR>
 
 let g:tern_map_keys=1
 let g:tern_map_prefix = '<leader>'
+" Console log from insert mode; Puts focus inside parentheses
+imap cll console.log();<Esc>==f(a
+" Console log from visual mode on next line, puts visual selection inside parentheses
+vmap cll yocll<Esc>p
+" Console log from normal mode, inserted on next line with word your on inside parentheses
+nmap cll yiwocll<Esc>p 
