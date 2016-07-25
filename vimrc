@@ -208,6 +208,10 @@ let g:tern_map_prefix = '<leader>'
 set number
 
 nnoremap <C-g> :GundoToggle<CR>
+
+" allow the . to execute once for each line of a visual selection
+vnoremap . :normal .<CR>
+
 " Console log from insert mode; Puts focus inside parentheses
 imap cll console.log();<Esc>==f(a
 " Console log from visual mode on next line, puts visual selection inside parentheses
