@@ -202,6 +202,9 @@ autocmd filetype javascript nmap <silent> gD :TernDef<CR>
 
 let g:tern_map_keys=1
 let g:tern_map_prefix = '<leader>'
+
+set number
+
 nnoremap <C-g> :GundoToggle<CR>
 " Console log from insert mode; Puts focus inside parentheses
 imap cll console.log();<Esc>==f(a
