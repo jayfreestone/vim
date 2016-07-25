@@ -29,8 +29,10 @@ Plug 'scrooloose/syntastic'
 Plug 'tmhedberg/matchit'
 Plug 'joshdick/onedark.vim'
 Plug 'airblade/vim-gitgutter'
+Plug 'terryma/vim-multiple-cursors'
 Plug 'captbaritone/better-indent-support-for-php-with-html'
 Plug 'sjl/gundo.vim/'
+Plug 'tpope/vim-repeat'
 
 call plug#end()
 
