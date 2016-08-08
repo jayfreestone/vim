@@ -107,20 +107,21 @@ set statusline=%<\ %f\ %{fugitive#statusline()}
 let mapleader=","
 set nowrap
 set lazyredraw
-set shiftwidth=2
-set tabstop=4
 set smartindent
 set autoindent
-set sw=4
-set shiftwidth=4
-set noexpandtab
+set shiftwidth=2
+set expandtab
+set tabstop=2
 set nobackup
 set backupcopy=no
 set nowritebackup
 set noswapfile
 set cursorline
 set incsearch  ignorecase  smartcase
-" set autowrite
+set number
+
+" Fix indentation on PHP files
+autocmd BufRead,BufNewFile   *.html,*.php set shiftwidth=4 tabstop=4 noexpandtab
 
 " Look for ctags all to the way up to the root
 set tags+=tags;$HOME
@@ -181,9 +182,10 @@ nnoremap <buffer> <C-]> :tjump /<c-r>=expand('<cword>')<CR><CR>
 
 " Disables all gitgutter keybindings
 let g:gitgutter_map_keys = 0
-" nmap <Leader>ha <Plug>GitGutterStageHunk
-" nmap <Leader>hr <Plug>GitGutterUndoHunk
+nmap <Leader>ha <Plug>GitGutterStageHunk
+nmap <Leader>hr <Plug>GitGutterUndoHunk
 
+" WordProcessor Mode for text editing
 func! WordProcessorMode() 
 	setlocal formatoptions=1 
 	setlocal noexpandtab 
@@ -202,10 +204,9 @@ com! WP call WordProcessorMode()
 autocmd filetype javascript nmap <silent> gd :TernDef<CR>
 autocmd filetype javascript nmap <silent> gD :TernDef<CR>
 
+" Set up tern mapping
 let g:tern_map_keys=1
 let g:tern_map_prefix = '<leader>'
-
-set number
 
 nnoremap <C-g> :GundoToggle<CR>
 
