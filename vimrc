@@ -33,6 +33,8 @@ Plug 'terryma/vim-multiple-cursors'
 Plug 'captbaritone/better-indent-support-for-php-with-html'
 Plug 'sjl/gundo.vim/'
 Plug 'tpope/vim-repeat'
+Plug 'nelsyeung/twig.vim'
+Plug 'tpope/vim-sleuth'
 
 call plug#end()
 
