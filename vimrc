@@ -24,7 +24,6 @@ Plug 'dsawardekar/wordpress.vim'
 Plug 'w0ng/vim-hybrid'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'ctrlpvim/ctrlp.vim'
-Plug 'Valloric/YouCompleteMe'
 Plug 'scrooloose/syntastic'
 Plug 'tmhedberg/matchit'
 Plug 'joshdick/onedark.vim'
@@ -36,7 +35,73 @@ Plug 'tpope/vim-repeat'
 Plug 'nelsyeung/twig.vim'
 Plug 'tpope/vim-sleuth'
 
+if has('nvim')
+	Plug 'benekastah/neomake'
+	Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+	Plug 'Valloric/YouCompleteMe'
+endif
+
 call plug#end()
+
+if has('nvim')
+	" Disables Python 3 interpreter check
+	let g:python3_host_skip_check = 1
+
+	" Use deoplete.
+	let g:deoplete#enable_at_startup = 1
+	let g:deoplete#enable_ignore_case = 'ignorecase'
+	let g:deoplete#omni_patterns = {}
+	let g:deoplete#omni_patterns.php =
+				\ '\h\w*\|[^. \t]->\%(\h\w*\)\?\|\h\w*::\%(\h\w*\)\?'
+
+	" Run Neocomplete on save
+	autocmd! BufWritePost * Neomake
+	" autocmd! BufWritePost,BufEnter * Neomake
+	let g:neomake_open_list = 2
+	let g:neomake_php_enabled_makers = ['phpcs']
+	let g:neomake_php_phpcs_args_standard = 'WordPress-Core'
+	let g:neomake_javascript_enabled_makers = ['eslint']
+	let g:neomake_javascript_eslint_maker = {
+				\ 'args': ['--no-color', '--format', 'compact', '--config', '~/.eslintrc'],
+				\ 'errorformat': '%f: line %l\, col %c\, %m'
+				\ }
+
+	" Use system clipboard by default
+	set clipboard+=unnamedplus
+
+	" Enables true color
+	" let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+else
+	" Syntastic Settings
+	set statusline+=%#warningmsg#
+	set statusline+=%{SyntasticStatuslineFlag()}
+	set statusline+=%*
+
+	map <s> <Nop>
+	map <C-S> :SyntasticCheck<CR>
+
+	let g:syntastic_always_populate_loc_list = 1
+	let g:syntastic_loc_list_height = 5
+	let g:syntastic_auto_loc_list = 0
+	let g:syntastic_check_on_open = 1
+	let g:syntastic_check_on_wq = 1
+	let g:syntastic_php_phpcs_args="--report=csv --standard=WordPress-Extra"
+	let g:syntastic_html_checkers = ['w3']
+	let g:syntastic_scss_checkers = ['']
+	let g:syntastic_javascript_checkers = ['eslint']
+
+	let g:syntastic_error_symbol = '❌'
+	let g:syntastic_style_error_symbol = '⁉️'
+	let g:syntastic_warning_symbol = '⚠️'
+	let g:syntastic_style_warning_symbol = '💩'
+
+	highlight link SyntasticErrorSign SignColumn
+	highlight link SyntasticWarningSign SignColumn
+	highlight link SyntasticStyleErrorSign SignColumn
+	highlight link SyntasticStyleWarningSign SignColumn
+
+endif
 
 " Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
 if executable('ag')
@@ -49,32 +114,6 @@ endif
 
 " CtrlP Buffer Search
 map <C-b> :CtrlPBuffer<CR>
-
-" Syntastic Settings
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-map <s> <Nop>
-map <C-S> :SyntasticCheck<CR>
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_loc_list_height = 5
-let g:syntastic_auto_loc_list = 0
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 1
-let g:syntastic_php_phpcs_args="--report=csv --standard=WordPress-Extra"
-let g:syntastic_javascript_checkers = ['eslint']
-
-let g:syntastic_error_symbol = '❌'
-let g:syntastic_style_error_symbol = '⁉️'
-let g:syntastic_warning_symbol = '⚠️'
-let g:syntastic_style_warning_symbol = '💩'
-
-highlight link SyntasticErrorSign SignColumn
-highlight link SyntasticWarningSign SignColumn
-highlight link SyntasticStyleErrorSign SignColumn
-highlight link SyntasticStyleWarningSign SignColumn
 
 " Color Scheme
 set background=dark
