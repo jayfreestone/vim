@@ -270,8 +270,8 @@ nnoremap <buffer> <C-]> :tjump /<c-r>=expand('<cword>')<CR><CR>
 
 " Disables all gitgutter keybindings
 let g:gitgutter_map_keys = 0
-nmap <Leader>ha <Plug>GitGutterStageHunk
-nmap <Leader>hr <Plug>GitGutterUndoHunk
+" nmap <Leader>gs <Plug>GitGutterStageHunk
+" nmap <Leader>gr <Plug>GitGutterUndoHunk
 
 " WordProcessor Mode for text editing
 func! WordProcessorMode() 
@@ -307,3 +307,6 @@ imap cll console.log();<Esc>==f(a
 vmap cll yocll<Esc>p
 " Console log from normal mode, inserted on next line with word your on inside parentheses
 nmap cll yiwocll<Esc>p 
+
+" Exit out of hlsearch
+nnoremap <silent> <C-s> :nohlsearch<CR><C-s>
