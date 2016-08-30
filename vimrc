@@ -31,6 +31,7 @@ Plug 'captbaritone/better-indent-support-for-php-with-html'
 Plug 'sjl/gundo.vim/'
 Plug 'tpope/vim-repeat'
 Plug 'nelsyeung/twig.vim'
+Plug 'tokutake/twig-indent'
 Plug 'tpope/vim-sleuth'
 
 if has('nvim')
