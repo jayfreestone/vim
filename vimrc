@@ -135,7 +135,9 @@ if has("gui_running")
 else
   " FZF {{{
   " <C-p> or <C-t> to search files
-  nnoremap <silent> <C-p> :FZF -m<cr>
+  " nnoremap <silent> <C-p> :FZF -m<cr>
+  nnoremap <silent> <C-p> :call fzf#vim#files('',
+        \ {'source': 'ag --hidden --ignore .git -f -g ""', 'down': '40%'})<cr>
 
   " <M-p> for open buffers
   nnoremap <silent> <C-b> :Buffers<cr>
