@@ -33,6 +33,7 @@ Plug 'tpope/vim-repeat'
 Plug 'nelsyeung/twig.vim'
 Plug 'tokutake/twig-indent'
 Plug 'tpope/vim-sleuth'
+Plug 'michaeljsmith/vim-indent-object'
 
 if has('nvim')
   Plug 'benekastah/neomake'
