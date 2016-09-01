@@ -12,7 +12,6 @@ Plug 'SirVer/ultisnips'
 Plug 'mattn/emmet-vim'
 Plug 'tpope/vim-surround'
 Plug 'MattesGroeger/vim-bookmarks'
-Plug 'ervandew/ag'
 Plug 'shawncplus/phpcomplete.vim'
 Plug 'othree/html5.vim'
 Plug 'jiangmiao/auto-pairs'
@@ -34,6 +33,8 @@ Plug 'nelsyeung/twig.vim'
 Plug 'tokutake/twig-indent'
 Plug 'tpope/vim-sleuth'
 Plug 'michaeljsmith/vim-indent-object'
+Plug 'jeetsukumaran/vim-indentwise'
+Plug 'rakr/vim-two-firewatch'
 
 if has('nvim')
   Plug 'benekastah/neomake'
@@ -50,6 +51,9 @@ else
   Plug 'junegunn/fzf.vim'
 endif
 
+" Needs to be loaded after fzf, to override 'Ag command'
+Plug 'ervandew/ag'
+
 call plug#end()
 
 if has('nvim')
@@ -65,8 +69,7 @@ if has('nvim')
 
   " Run Neocomplete on save
   autocmd! BufWritePost * Neomake
-  " autocmd! BufWritePost,BufEnter * Neomake
-  let g:neomake_open_list = 2
+  let g:neomake_open_list = 0
   let g:neomake_php_enabled_makers = ['phpcs']
   let g:neomake_php_phpcs_args_standard = 'WordPress-Core'
   let g:neomake_javascript_enabled_makers = ['eslint']
@@ -80,6 +83,7 @@ if has('nvim')
 
   " Enables true color
   " let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+  set termguicolors
 
   " Temporary fix for neovim/neovim#2048
   " Shoutout to @vilhalmer for the idea for this fix
@@ -180,7 +184,10 @@ endif
 
 " Color Scheme
 set background=dark
-colorscheme onedark
+colorscheme two-firewatch
+
+" Set Rule
+set colorcolumn=80
 
 " Start EasyAlign
 map <C-a> :EasyAlign<CR>
