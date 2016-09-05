@@ -31,7 +31,6 @@ Plug 'sjl/gundo.vim/'
 Plug 'tpope/vim-repeat'
 Plug 'nelsyeung/twig.vim'
 Plug 'tokutake/twig-indent'
-Plug 'tpope/vim-sleuth'
 Plug 'michaeljsmith/vim-indent-object'
 Plug 'jeetsukumaran/vim-indentwise'
 Plug 'rakr/vim-two-firewatch'
@@ -109,7 +108,7 @@ else
   let g:syntastic_check_on_open = 1
   let g:syntastic_check_on_wq = 1
   let g:syntastic_php_phpcs_args="--report=csv --standard=WordPress-Extra"
-  let g:syntastic_html_checkers = ['w3']
+  let g:syntastic_html_checkers = ['']
   let g:syntastic_scss_checkers = ['']
   let g:syntastic_javascript_checkers = ['eslint']
 
