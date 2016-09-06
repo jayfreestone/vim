@@ -34,7 +34,6 @@ Plug 'tokutake/twig-indent'
 Plug 'michaeljsmith/vim-indent-object'
 Plug 'jeetsukumaran/vim-indentwise'
 Plug 'rakr/vim-two-firewatch'
-Plug 'ciaranm/detectindent'
 
 if has('nvim')
   Plug 'benekastah/neomake'
