@@ -122,6 +122,8 @@ else
   highlight link SyntasticStyleErrorSign SignColumn
   highlight link SyntasticStyleWarningSign SignColumn
 
+  " Stop YCM from looking through massive tag files
+  let g:ycm_collect_identifiers_from_tags_files = 0
 endif
 
 if has("gui_running")
