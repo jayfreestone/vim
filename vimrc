@@ -105,8 +105,14 @@ else
   nnoremap <silent> <C-p> :call fzf#vim#files('',
         \ {'source': 'ag --hidden --ignore .git -f -g ""', 'down': '40%'})<cr>
 
-  " <M-p> for open buffers
-  nnoremap <silent> <C-b> :Buffers<cr>
+  " <Ctrl-b> for open buffers
+  nnoremap <silent> <C-b> :FzfBuffers<cr>
+
+  " <Ctrl-b> for open buffers
+  nnoremap <silent> <C-b> :FzfBuffers<cr>
+	
+  " <Ctrl-t> for buffer tags
+  nnoremap <silent> <C-t> :FzfBTags<cr>
 
   " <M-S-p> for MRU
   nnoremap <silent> <M-S-p> :History<cr>
