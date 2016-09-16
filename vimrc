@@ -94,6 +94,16 @@ if has("gui_running")
 
   " CtrlP Buffer Search
   map <C-b> :CtrlPBuffer<CR>
+  map <C-t> :CtrlPBufTag<CR>
+
+  let g:ctrlp_buftag_types = {
+    \ 'coffee': '',
+    \ 'ghmarkdown': '',
+    \ 'go': '',
+    \ 'javascript': '',
+    \ 'markdown': '',
+    \ 'scss': ''
+    \ }
 else
   " FZF {{{
   " <C-p> or <C-t> to search files
