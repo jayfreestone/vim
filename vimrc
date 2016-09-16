@@ -36,16 +36,16 @@ Plug 'rakr/vim-two-firewatch'
 Plug 'Valloric/YouCompleteMe'
 Plug 'scrooloose/syntastic'
 Plug 'editorconfig/editorconfig-vim'
+Plug 'ervandew/ag'
 
 if has("gui_running")
   Plug 'ctrlpvim/ctrlp.vim'
+  " Needs to be loaded after fzf, to override 'Ag command'
+  Plug 'ervandew/ag'
 else
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all'  }
   Plug 'junegunn/fzf.vim'
 endif
-
-" Needs to be loaded after fzf, to override 'Ag command'
-Plug 'ervandew/ag'
 
 call plug#end()
 
@@ -98,6 +98,10 @@ else
   " FZF {{{
   " <C-p> or <C-t> to search files
   " nnoremap <silent> <C-p> :FZF -m<cr>
+  
+  " Gets around FZF overriding Ag command
+  let g:fzf_command_prefix = 'Fzf'
+
   nnoremap <silent> <C-p> :call fzf#vim#files('',
         \ {'source': 'ag --hidden --ignore .git -f -g ""', 'down': '40%'})<cr>
 
