@@ -19,7 +19,6 @@ Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-vinegar'
 Plug 'easymotion/vim-easymotion'
 Plug 'ternjs/tern_for_vim'
-Plug 'dsawardekar/wordpress.vim'
 Plug 'w0ng/vim-hybrid'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'tmhedberg/matchit'
@@ -34,97 +33,54 @@ Plug 'tokutake/twig-indent'
 Plug 'michaeljsmith/vim-indent-object'
 Plug 'jeetsukumaran/vim-indentwise'
 Plug 'rakr/vim-two-firewatch'
-
-if has('nvim')
-  Plug 'benekastah/neomake'
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-else
-  Plug 'Valloric/YouCompleteMe'
-  Plug 'scrooloose/syntastic'
-endif
+Plug 'Valloric/YouCompleteMe'
+Plug 'scrooloose/syntastic'
+Plug 'editorconfig/editorconfig-vim'
+Plug 'ervandew/ag'
 
 if has("gui_running")
   Plug 'ctrlpvim/ctrlp.vim'
+  " Needs to be loaded after fzf, to override 'Ag command'
+  Plug 'ervandew/ag'
 else
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all'  }
   Plug 'junegunn/fzf.vim'
 endif
 
-" Needs to be loaded after fzf, to override 'Ag command'
-Plug 'ervandew/ag'
-
 call plug#end()
 
-if has('nvim')
-  " Disables Python 3 interpreter check
-  let g:python3_host_skip_check = 1
+set termguicolors
 
-  " Use deoplete.
-  let g:deoplete#enable_at_startup = 1
-  let g:deoplete#enable_ignore_case = 'ignorecase'
-  let g:deoplete#omni_patterns = {}
-  let g:deoplete#omni_patterns.php =
-	\ '\h\w*\|[^. \t]->\%(\h\w*\)\?\|\h\w*::\%(\h\w*\)\?'
+" Syntastic Settings
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
 
-  " Run Neocomplete on save
-  autocmd! BufWritePost * Neomake
-  let g:neomake_open_list = 0
-  let g:neomake_php_enabled_makers = ['phpcs']
-  let g:neomake_php_phpcs_args_standard = 'WordPress-Core'
-  let g:neomake_javascript_enabled_makers = ['eslint']
-  let g:neomake_javascript_eslint_maker = {
-	\ 'args': ['--no-color', '--format', 'compact', '--config', '~/.eslintrc'],
-	\ 'errorformat': '%f: line %l\, col %c\, %m'
-	\ }
+map <s> <Nop>
+map <C-S> :SyntasticCheck<CR>
 
-  " Use system clipboard by default
-  set clipboard+=unnamedplus
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_loc_list_height = 5
+let g:syntastic_auto_loc_list = 0
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 1
+let g:syntastic_php_phpcs_args="--report=csv --standard=WordPress-Extra"
+let g:syntastic_html_checkers = ['']
+let g:syntastic_scss_checkers = ['']
+let g:syntastic_javascript_checkers = ['eslint']
 
-  " Enables true color
-  " let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-  set termguicolors
+let g:syntastic_error_symbol = '❌'
+let g:syntastic_style_error_symbol = '⁉️'
+let g:syntastic_warning_symbol = '⚠️'
+let g:syntastic_style_warning_symbol = '💩'
 
-  " Temporary fix for neovim/neovim#2048
-  " Shoutout to @vilhalmer for the idea for this fix
-  " https://github.com/vilhalmer/System/commit/a40ff262918a83e88fb643bad31dde3c45211bba
+highlight link SyntasticErrorSign SignColumn
+highlight link SyntasticWarningSign SignColumn
+highlight link SyntasticStyleErrorSign SignColumn
+highlight link SyntasticStyleWarningSign SignColumn
 
-  " Fix for window movement
-  nmap <bs> <C-w>h
-  " Fix for tab movement
-  nmap <C-w><bs> :tabprevious<CR>
-
-else
-  " Syntastic Settings
-  set statusline+=%#warningmsg#
-  set statusline+=%{SyntasticStatuslineFlag()}
-  set statusline+=%*
-
-  map <s> <Nop>
-  map <C-S> :SyntasticCheck<CR>
-
-  let g:syntastic_always_populate_loc_list = 1
-  let g:syntastic_loc_list_height = 5
-  let g:syntastic_auto_loc_list = 0
-  let g:syntastic_check_on_open = 1
-  let g:syntastic_check_on_wq = 1
-  let g:syntastic_php_phpcs_args="--report=csv --standard=WordPress-Extra"
-  let g:syntastic_html_checkers = ['']
-  let g:syntastic_scss_checkers = ['']
-  let g:syntastic_javascript_checkers = ['eslint']
-
-  let g:syntastic_error_symbol = '❌'
-  let g:syntastic_style_error_symbol = '⁉️'
-  let g:syntastic_warning_symbol = '⚠️'
-  let g:syntastic_style_warning_symbol = '💩'
-
-  highlight link SyntasticErrorSign SignColumn
-  highlight link SyntasticWarningSign SignColumn
-  highlight link SyntasticStyleErrorSign SignColumn
-  highlight link SyntasticStyleWarningSign SignColumn
-
-  " Stop YCM from looking through massive tag files
-  let g:ycm_collect_identifiers_from_tags_files = 0
-endif
+" Stop YCM from looking through massive tag files
+let g:ycm_collect_identifiers_from_tags_files = 0
 
 if has("gui_running")
   " Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
@@ -138,15 +94,35 @@ if has("gui_running")
 
   " CtrlP Buffer Search
   map <C-b> :CtrlPBuffer<CR>
+  map <C-t> :CtrlPBufTag<CR>
+
+  let g:ctrlp_buftag_types = {
+    \ 'coffee': '',
+    \ 'ghmarkdown': '',
+    \ 'go': '',
+    \ 'javascript': '',
+    \ 'markdown': '',
+    \ 'scss': ''
+    \ }
 else
   " FZF {{{
   " <C-p> or <C-t> to search files
   " nnoremap <silent> <C-p> :FZF -m<cr>
+  
+  " Gets around FZF overriding Ag command
+  let g:fzf_command_prefix = 'Fzf'
+
   nnoremap <silent> <C-p> :call fzf#vim#files('',
         \ {'source': 'ag --hidden --ignore .git -f -g ""', 'down': '40%'})<cr>
 
-  " <M-p> for open buffers
-  nnoremap <silent> <C-b> :Buffers<cr>
+  " <Ctrl-b> for open buffers
+  nnoremap <silent> <C-b> :FzfBuffers<cr>
+
+  " <Ctrl-b> for open buffers
+  nnoremap <silent> <C-b> :FzfBuffers<cr>
+	
+  " <Ctrl-t> for buffer tags
+  nnoremap <silent> <C-t> :FzfBTags<cr>
 
   " <M-S-p> for MRU
   nnoremap <silent> <M-S-p> :History<cr>
@@ -270,9 +246,6 @@ set completeopt-=preview
 " Adds more sources for word completion
 set complete=.,w,b,u,t,i
 
-" Sets up relative WP path for WP Vim
-let g:wordpress_vim_wordpress_path="../../wordpress"
-
 " Go to tag support for JS methods
 " in ~/.vim/after/ftplugin/javascript.vim
 nnoremap <buffer> <C-]> :tjump /<c-r>=expand('<cword>')<CR><CR>
@@ -319,3 +292,6 @@ nmap cll yiwocll<Esc>p
 
 " Exit out of hlsearch
 nnoremap <silent> <C-s> :nohlsearch<CR><C-s>
+
+" Ensures Editorconfig works with Fugitive
+let g:EditorConfig_exclude_patterns = ['fugitive://.*']
