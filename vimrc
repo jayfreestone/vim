@@ -25,7 +25,8 @@ Plug 'tmhedberg/matchit'
 Plug 'joshdick/onedark.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'terryma/vim-multiple-cursors'
-Plug 'captbaritone/better-indent-support-for-php-with-html'
+" Plug 'captbaritone/better-indent-support-for-php-with-html'
+" Plug 'vim-scripts/php.vim-html-enhanced'
 Plug 'sjl/gundo.vim/'
 Plug 'tpope/vim-repeat'
 Plug 'nelsyeung/twig.vim'
@@ -33,15 +34,15 @@ Plug 'tokutake/twig-indent'
 Plug 'michaeljsmith/vim-indent-object'
 Plug 'jeetsukumaran/vim-indentwise'
 Plug 'rakr/vim-two-firewatch'
-Plug 'Valloric/YouCompleteMe'
 Plug 'scrooloose/syntastic'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'ervandew/ag'
+Plug 'w0rp/ale'
+Plug 'mhinz/vim-grepper'
+Plug 'Shougo/neocomplete.vim'
 
 if has("gui_running")
   Plug 'ctrlpvim/ctrlp.vim'
-  " Needs to be loaded after fzf, to override 'Ag command'
-  Plug 'ervandew/ag'
 else
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all'  }
   Plug 'junegunn/fzf.vim'
@@ -51,36 +52,18 @@ call plug#end()
 
 set termguicolors
 
-" Syntastic Settings
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+" Grepper
+command! -nargs=* -complete=file GG Grepper -tool git -query <args>
+command! -nargs=* Ag Grepper -noprompt -tool ag -grepprg ag --vimgrep <args> %
 
-map <s> <Nop>
-map <C-S> :SyntasticCheck<CR>
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_loc_list_height = 5
-let g:syntastic_auto_loc_list = 0
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 1
-let g:syntastic_php_phpcs_args="--report=csv --standard=WordPress-Extra"
-let g:syntastic_html_checkers = ['']
-let g:syntastic_scss_checkers = ['']
-let g:syntastic_javascript_checkers = ['eslint']
-
-let g:syntastic_error_symbol = '❌'
-let g:syntastic_style_error_symbol = '⁉️'
-let g:syntastic_warning_symbol = '⚠️'
-let g:syntastic_style_warning_symbol = '💩'
-
-highlight link SyntasticErrorSign SignColumn
-highlight link SyntasticWarningSign SignColumn
-highlight link SyntasticStyleErrorSign SignColumn
-highlight link SyntasticStyleWarningSign SignColumn
+" Disable Eclim validation
+let g:EclimFileTypeValidate = 0
 
 " Stop YCM from looking through massive tag files
 let g:ycm_collect_identifiers_from_tags_files = 0
+
+" YCM + Eclim
+let g:EclimCompletionMethod = 'omnifunc'
 
 if has("gui_running")
   " Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
@@ -90,6 +73,9 @@ if has("gui_running")
 
     " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
     let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+
+    " Only look in current folder
+    let g:ctrlp_working_path_mode = 0
   endif
 
   " CtrlP Buffer Search
@@ -291,7 +277,67 @@ vmap cll yocll<Esc>p
 nmap cll yiwocll<Esc>p 
 
 " Exit out of hlsearch
-nnoremap <silent> <C-s> :nohlsearch<CR><C-s>
+nnoremap <esc><esc> :noh<return><esc>
 
 " Ensures Editorconfig works with Fugitive
 let g:EditorConfig_exclude_patterns = ['fugitive://.*']
+
+"Note: This option must be set in .vimrc(_vimrc).  NOT IN .gvimrc(_gvimrc)!
+" Disable AutoComplPop.
+let g:acp_enableAtStartup = 0
+" Use neocomplete.
+let g:neocomplete#enable_at_startup = 1
+" Use smartcase.
+let g:neocomplete#enable_smart_case = 1
+" Set minimum syntax keyword length.
+let g:neocomplete#sources#syntax#min_keyword_length = 3
+let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
+
+" Define dictionary.
+let g:neocomplete#sources#dictionary#dictionaries = {
+    \ 'default' : '',
+    \ 'vimshell' : $HOME.'/.vimshell_hist',
+    \ 'scheme' : $HOME.'/.gosh_completions'
+        \ }
+
+" Define keyword.
+if !exists('g:neocomplete#keyword_patterns')
+    let g:neocomplete#keyword_patterns = {}
+endif
+let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+
+" Plugin key-mappings.
+inoremap <expr><C-g>     neocomplete#undo_completion()
+inoremap <expr><C-l>     neocomplete#complete_common_string()
+
+" Recommended key-mappings.
+" <CR>: close popup and save indent.
+inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+function! s:my_cr_function()
+  return (pumvisible() ? "\<C-y>" : "" ) . "\<CR>"
+  " For no inserting <CR> key.
+  "return pumvisible() ? "\<C-y>" : "\<CR>"
+endfunction
+" <TAB>: completion.
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+" <C-h>, <BS>: close popup and delete backword char.
+inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+
+" Enable omni completion.
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+" autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType javascript setlocal omnifunc=tern#Complete
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+
+" Enable heavy omni completion.
+if !exists('g:neocomplete#sources#omni#input_patterns')
+  let g:neocomplete#sources#omni#input_patterns = {}
+endif
+let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
+let g:neocomplete#sources#omni#input_patterns.javascript = '\h\w*\|[^. \t]\.\w*'
+
+"let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
+"let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
