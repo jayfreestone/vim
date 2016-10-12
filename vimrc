@@ -16,7 +16,6 @@ Plug 'shawncplus/phpcomplete.vim'
 Plug 'othree/html5.vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'sheerun/vim-polyglot'
-Plug 'tpope/vim-vinegar'
 Plug 'easymotion/vim-easymotion'
 Plug 'ternjs/tern_for_vim'
 Plug 'w0ng/vim-hybrid'
@@ -25,8 +24,6 @@ Plug 'tmhedberg/matchit'
 Plug 'joshdick/onedark.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'terryma/vim-multiple-cursors'
-" Plug 'captbaritone/better-indent-support-for-php-with-html'
-" Plug 'vim-scripts/php.vim-html-enhanced'
 Plug 'sjl/gundo.vim/'
 Plug 'tpope/vim-repeat'
 Plug 'nelsyeung/twig.vim'
@@ -39,6 +36,7 @@ Plug 'ervandew/ag'
 Plug 'w0rp/ale'
 Plug 'mhinz/vim-grepper'
 Plug 'Shougo/neocomplete.vim'
+Plug 'scrooloose/nerdtree'
 
 if has("gui_running")
   Plug 'ctrlpvim/ctrlp.vim'
@@ -340,4 +338,6 @@ let g:neocomplete#sources#omni#input_patterns.javascript = '\h\w*\|[^. \t]\.\w*'
 
 "let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
 "let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
-"
+
+nmap <silent> <C-D> :NERDTreeToggle<CR>
+nmap <silent> - :NERDTreeFind <CR>
