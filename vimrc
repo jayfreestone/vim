@@ -37,6 +37,7 @@ Plug 'w0rp/ale'
 Plug 'mhinz/vim-grepper'
 Plug 'Shougo/neocomplete.vim'
 Plug 'scrooloose/nerdtree'
+Plug 'unblevable/quick-scope'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'cocopon/iceberg.vim'
 
@@ -343,3 +344,9 @@ let g:neocomplete#sources#omni#input_patterns.javascript = '\h\w*\|[^. \t]\.\w*'
 
 nmap <silent> <C-D> :NERDTreeToggle<CR>
 nmap <silent> - :NERDTreeFind <CR>
+
+" Trigger a quickscope highlight
+let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
+let g:qs_first_occurrence_highlight_color = '#e3aa83'
+let g:qs_second_occurrence_highlight_color = '#aebd85'
+
