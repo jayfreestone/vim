@@ -37,6 +37,7 @@ Plug 'w0rp/ale'
 Plug 'mhinz/vim-grepper'
 Plug 'Shougo/neocomplete.vim'
 Plug 'scrooloose/nerdtree'
+Plug 'cocopon/iceberg.vim'
 
 if has("gui_running")
   Plug 'ctrlpvim/ctrlp.vim'
@@ -144,7 +145,7 @@ endif
 
 " Color Scheme
 set background=dark
-colorscheme two-firewatch
+colorscheme iceberg
 
 " Set Rule
 set colorcolumn=80
