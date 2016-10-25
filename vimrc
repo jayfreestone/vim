@@ -37,6 +37,7 @@ Plug 'w0rp/ale'
 Plug 'mhinz/vim-grepper'
 Plug 'Shougo/neocomplete.vim'
 Plug 'scrooloose/nerdtree'
+Plug 'AndrewRadev/splitjoin.vim'
 Plug 'cocopon/iceberg.vim'
 
 if has("gui_running")
