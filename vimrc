@@ -350,3 +350,6 @@ let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 let g:qs_first_occurrence_highlight_color = '#e3aa83'
 let g:qs_second_occurrence_highlight_color = '#aebd85'
 
+" Prefer :tjump over :tag
+nnoremap <c-]> g<c-]>
+vnoremap <c-]> g<c-]>
