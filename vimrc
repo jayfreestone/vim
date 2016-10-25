@@ -275,6 +275,7 @@ vmap cll yocll<Esc>p
 " Console log from normal mode, inserted on next line with word your on inside parentheses
 nmap cll yiwocll<Esc>p 
 
+set hlsearch
 " Exit out of hlsearch
 nnoremap <esc><esc> :noh<return><esc>
 
