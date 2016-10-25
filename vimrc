@@ -55,15 +55,6 @@ set termguicolors
 command! -nargs=* -complete=file GG Grepper -tool git -query <args>
 command! -nargs=* Ag Grepper -noprompt -tool ag -grepprg ag --vimgrep <args> %
 
-" Disable Eclim validation
-let g:EclimFileTypeValidate = 0
-
-" Stop YCM from looking through massive tag files
-let g:ycm_collect_identifiers_from_tags_files = 0
-
-" YCM + Eclim
-let g:EclimCompletionMethod = 'omnifunc'
-
 if has("gui_running")
   " Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
   if executable('ag')
@@ -158,18 +149,15 @@ map <C-a> :EasyAlign<CR>
 set undofile
 set undodir=~/.vim/undodir
 
-" Statusline
-set statusline=%<\ %f\ %{fugitive#statusline()}
-
 " General Settings
 let mapleader=","
 set nowrap
 set lazyredraw
 set smartindent
 set autoindent
-set shiftwidth=2
+set shiftwidth=4
 set expandtab
-set tabstop=2
+set tabstop=4
 set nobackup
 set backupcopy=no
 set nowritebackup
@@ -177,6 +165,7 @@ set noswapfile
 set cursorline
 set incsearch  ignorecase  smartcase
 set number
+set laststatus=2
 
 " Fix indentation on PHP files
 autocmd BufRead,BufNewFile   *.html,*.php set shiftwidth=4 tabstop=4 noexpandtab
