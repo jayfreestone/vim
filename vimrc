@@ -21,7 +21,6 @@ Plug 'ternjs/tern_for_vim'
 Plug 'w0ng/vim-hybrid'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'tmhedberg/matchit'
-Plug 'joshdick/onedark.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'sjl/gundo.vim/'
 Plug 'tpope/vim-repeat'
@@ -32,12 +31,11 @@ Plug 'jeetsukumaran/vim-indentwise'
 Plug 'rakr/vim-two-firewatch'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'ervandew/ag'
-Plug 'w0rp/ale'
 Plug 'mhinz/vim-grepper'
 Plug 'Shougo/neocomplete.vim'
 Plug 'scrooloose/nerdtree'
-Plug 'unblevable/quick-scope'
 Plug 'AndrewRadev/splitjoin.vim'
+Plug 'neomake/neomake'
 Plug 'cocopon/iceberg.vim'
 
 if has("gui_running")
@@ -336,9 +334,13 @@ nmap <silent> - :NERDTreeFind <CR>
 
 " Trigger a quickscope highlight
 let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
-let g:qs_first_occurrence_highlight_color = '#e3aa83'
-let g:qs_second_occurrence_highlight_color = '#aebd85'
+" let g:qs_first_occurrence_highlight_color = '#e3aa83'
+" let g:qs_second_occurrence_highlight_color = '#aebd85'
 
 " Prefer :tjump over :tag
 nnoremap <c-]> g<c-]>
 vnoremap <c-]> g<c-]>
+
+"Neomake setup
+autocmd! BufWritePost * Neomake
+let g:neomake_javascript_enabled_makers = ['eslint']
