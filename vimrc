@@ -35,7 +35,7 @@ Plug 'mhinz/vim-grepper'
 Plug 'Shougo/neocomplete.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'AndrewRadev/splitjoin.vim'
-Plug 'neomake/neomake'
+Plug 'w0rp/ale'
 Plug 'justinmk/vim-sneak'
 Plug 'cocopon/iceberg.vim'
 
@@ -342,6 +342,5 @@ let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 nnoremap <c-]> g<c-]>
 vnoremap <c-]> g<c-]>
 
-"Neomake setup
-autocmd! BufWritePost * Neomake
-let g:neomake_javascript_enabled_makers = ['eslint']
+" Ale
+let g:ale_sign_column_always = 1
