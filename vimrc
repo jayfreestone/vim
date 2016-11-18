@@ -36,6 +36,7 @@ Plug 'Shougo/neocomplete.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'neomake/neomake'
+Plug 'justinmk/vim-sneak'
 Plug 'cocopon/iceberg.vim'
 
 if has("gui_running")
