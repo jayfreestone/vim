@@ -1,4 +1,23 @@
 set surround
+set incsearch
+set ignorecase
+set smartcase
+
+let mapleader = ","
+
+" Switch tabs
+nnoremap <leader>l gt
+nnoremap <leader>h gT
+
+" Acejump
+map <leader>f :action AceJumpAction<CR>
+map <leader>f :action AceJumpAction<CR>
+
+" 'Buffer' style
+map <C-b> :action RecentChangedFiles<CR>
+
+" File structure
+map - :action ActivateProjectToolWindow<CR>
 
 " Use ctrl-[hjkl] to select the active split
 map <C-k> <C-W>k
