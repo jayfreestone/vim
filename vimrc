@@ -37,7 +37,7 @@ Plug 'scrooloose/nerdtree'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'w0rp/ale'
 Plug 'justinmk/vim-sneak'
-Plug 'cocopon/iceberg.vim'
+Plug 'tyrannicaltoucan/vim-deep-space'
 
 if has("gui_running")
   Plug 'ctrlpvim/ctrlp.vim'
@@ -136,7 +136,7 @@ endif
 
 " Color Scheme
 set background=dark
-colorscheme iceberg
+colorscheme deep-space
 
 " Set Rule
 set colorcolumn=80
