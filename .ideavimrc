@@ -10,7 +10,7 @@ nnoremap <leader>l gt
 nnoremap <leader>h gT
 
 " Acejump
-map <leader>f :action AceJumpAction<CR>
+map <leader>f :action AceAction<CR>
 
 " 'Buffer' style
 map <C-b> :action RecentChangedFiles<CR>
