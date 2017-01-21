@@ -48,7 +48,14 @@ endif
 
 call plug#end()
 
+let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+
 set termguicolors
+
+" Enable mouse support
+set mouse=n
+set ttymouse=xterm2
 
 " Grepper
 command! -nargs=* -complete=file GG Grepper -tool git -query <args>
