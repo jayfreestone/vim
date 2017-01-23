@@ -37,7 +37,9 @@ Plug 'scrooloose/nerdtree'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'w0rp/ale'
 Plug 'justinmk/vim-sneak'
-Plug 'tyrannicaltoucan/vim-deep-space'
+Plug 'rakr/vim-one'
+Plug 'w0ng/vim-hybrid'
+Plug 'christoomey/vim-tmux-navigator'
 
 if has("gui_running")
   Plug 'ctrlpvim/ctrlp.vim'
@@ -143,13 +145,12 @@ endif
 
 " Color Scheme
 set background=dark
-colorscheme deep-space
-
-" Set Rule
-set colorcolumn=80
+let g:hybrid_custom_term_colors = 1
+let g:hybrid_reduced_contrast = 1
+colorscheme hybrid
 
 " Start EasyAlign
-map <C-a> :EasyAlign<CR>
+" map <C-a> :EasyAlign<CR>
 
 " Undo persists after closing/re-opening
 set undofile
@@ -203,11 +204,9 @@ set hidden
 nnoremap <leader>l :bnext<CR>
 nnoremap <leader>h :bprev<CR>
 
-" Use ctrl-[hjkl] to select the active split
-nmap <silent> <c-k> :wincmd k<CR>
-nmap <silent> <c-j> :wincmd j<CR>
-nmap <silent> <c-h> :wincmd h<CR>
-nmap <silent> <c-l> :wincmd l<CR>
+" Stop NERDTree conflicting with tmux navigator
+let g:NERDTreeMapJumpNextSibling = '<Nop>'
+let g:NERDTreeMapJumpPrevSibling = '<Nop>'
 
 " Considers hyphens to be part of 'words'
 set iskeyword+=-
