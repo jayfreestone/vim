@@ -12,7 +12,7 @@ Plug 'SirVer/ultisnips'
 Plug 'mattn/emmet-vim'
 Plug 'tpope/vim-surround'
 Plug 'MattesGroeger/vim-bookmarks'
-Plug 'shawncplus/phpcomplete.vim'
+" Plug 'shawncplus/phpcomplete.vim'
 Plug 'othree/html5.vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'sheerun/vim-polyglot'
@@ -35,7 +35,7 @@ Plug 'mhinz/vim-grepper'
 Plug 'Shougo/neocomplete.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'AndrewRadev/splitjoin.vim'
-Plug 'w0rp/ale'
+Plug 'neomake/neomake'
 Plug 'justinmk/vim-sneak'
 Plug 'rakr/vim-one'
 Plug 'w0ng/vim-hybrid'
@@ -348,5 +348,5 @@ let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 nnoremap <c-]> g<c-]>
 vnoremap <c-]> g<c-]>
 
-" Ale
-let g:ale_sign_column_always = 1
+" Neomake
+autocmd! BufWritePost * Neomake
