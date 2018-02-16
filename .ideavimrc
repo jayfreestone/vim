@@ -16,7 +16,7 @@ map <leader>f :action AceAction<CR>
 map <C-b> :action RecentChangedFiles<CR>
 
 " File structure
-map - :action ActivateProjectToolWindow<CR>
+map - :action SelectInProjectView<CR>
 
 " Use ctrl-[hjkl] to select the active split
 map <C-k> <C-W>k
