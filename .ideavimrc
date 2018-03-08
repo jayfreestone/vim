@@ -24,4 +24,9 @@ map <C-h> <C-W>h
 map <C-j> <C-W>j
 map <C-l> <C-W>l
 
+" Bookmarks
+map mm :action ToggleBookmark<CR>
+map mn :action GotoNextBookmark<CR>
+map mp :action GotoPreviousBookmark<CR>
+
 nnoremap % :action EditorMatchBrace<CR>

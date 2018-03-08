@@ -350,3 +350,4 @@ vnoremap <c-]> g<c-]>
 
 " Neomake
 autocmd! BufWritePost * Neomake
+" let g:neomake_javascript_enabled_makers = ['eslint']
