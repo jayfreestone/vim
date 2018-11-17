@@ -3,6 +3,12 @@ syntax on
 
 call plug#begin('~/.vim/plugged')
 
+function! BuildTern(info)
+  if a:info.status == 'installed' || a:info.force
+    !npm install
+  endif
+endfunction
+
 " Plugins
 Plug 'junegunn/vim-easy-align'
 Plug 'ap/vim-buftabline'
@@ -12,12 +18,10 @@ Plug 'SirVer/ultisnips'
 Plug 'mattn/emmet-vim'
 Plug 'tpope/vim-surround'
 Plug 'MattesGroeger/vim-bookmarks'
-" Plug 'shawncplus/phpcomplete.vim'
 Plug 'othree/html5.vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'sheerun/vim-polyglot'
 Plug 'easymotion/vim-easymotion'
-Plug 'ternjs/tern_for_vim'
 Plug 'w0ng/vim-hybrid'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'tmhedberg/matchit'
@@ -28,18 +32,28 @@ Plug 'nelsyeung/twig.vim'
 Plug 'tokutake/twig-indent'
 Plug 'michaeljsmith/vim-indent-object'
 Plug 'jeetsukumaran/vim-indentwise'
-Plug 'rakr/vim-two-firewatch'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'ervandew/ag'
 Plug 'mhinz/vim-grepper'
-Plug 'Shougo/neocomplete.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'AndrewRadev/splitjoin.vim'
-Plug 'neomake/neomake'
 Plug 'justinmk/vim-sneak'
 Plug 'rakr/vim-one'
 Plug 'w0ng/vim-hybrid'
 Plug 'christoomey/vim-tmux-navigator'
+Plug 'w0rp/ale'
+Plug 'Shougo/echodoc.vim'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'ternjs/tern_for_vim', { 'for': ['javascript', 'javascript.jsx'], 'do': function('BuildTern') }
+Plug 'carlitux/deoplete-ternjs', { 'for': ['javascript', 'javascript.jsx'] }
+Plug 'padawan-php/deoplete-padawan', { 'do': 'composer install' }
+" Plug 'ncm2/ncm2'
+" Plug 'roxma/nvim-yarp'
+" Plug 'ncm2/ncm2-bufword'
+" Plug 'ncm2/ncm2-path'
+" Plug 'ncm2/ncm2-tern'
+" Plug 'phpactor/phpactor' ,  {'do': 'composer install', 'for': 'php'}
+" Plug 'phpactor/ncm2-phpactor'
 
 if has("gui_running")
   Plug 'ctrlpvim/ctrlp.vim'
@@ -57,7 +71,9 @@ set termguicolors
 
 " Enable mouse support
 set mouse=n
-set ttymouse=xterm2
+"set ttymouse=xterm2
+
+set cmdheight=2
 
 " Grepper
 command! -nargs=* -complete=file GG Grepper -tool git -query <args>
@@ -175,7 +191,7 @@ set number
 set laststatus=2
 
 " Fix indentation on PHP files
-autocmd BufRead,BufNewFile   *.html,*.php set shiftwidth=4 tabstop=4 noexpandtab
+" autocmd BufRead,BufNewFile   *.html,*.php set shiftwidth=4 tabstop=4 noexpandtab
 
 " Look for ctags all to the way up to the root
 set tags+=tags;$HOME
@@ -276,34 +292,6 @@ nnoremap <esc><esc> :noh<return><esc>
 " Ensures Editorconfig works with Fugitive
 let g:EditorConfig_exclude_patterns = ['fugitive://.*']
 
-"Note: This option must be set in .vimrc(_vimrc).  NOT IN .gvimrc(_gvimrc)!
-" Disable AutoComplPop.
-let g:acp_enableAtStartup = 0
-" Use neocomplete.
-let g:neocomplete#enable_at_startup = 1
-" Use smartcase.
-let g:neocomplete#enable_smart_case = 1
-" Set minimum syntax keyword length.
-let g:neocomplete#sources#syntax#min_keyword_length = 3
-let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
-
-" Define dictionary.
-let g:neocomplete#sources#dictionary#dictionaries = {
-    \ 'default' : '',
-    \ 'vimshell' : $HOME.'/.vimshell_hist',
-    \ 'scheme' : $HOME.'/.gosh_completions'
-        \ }
-
-" Define keyword.
-if !exists('g:neocomplete#keyword_patterns')
-    let g:neocomplete#keyword_patterns = {}
-endif
-let g:neocomplete#keyword_patterns['default'] = '\h\w*'
-
-" Plugin key-mappings.
-inoremap <expr><C-g>     neocomplete#undo_completion()
-inoremap <expr><C-l>     neocomplete#complete_common_string()
-
 " Recommended key-mappings.
 " <CR>: close popup and save indent.
 inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
@@ -313,10 +301,7 @@ function! s:my_cr_function()
   "return pumvisible() ? "\<C-y>" : "\<CR>"
 endfunction
 " <TAB>: completion.
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-" <C-h>, <BS>: close popup and delete backword char.
-inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
-inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+"inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 
 " Enable omni completion.
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
@@ -325,16 +310,6 @@ autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=tern#Complete
 autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-
-" Enable heavy omni completion.
-if !exists('g:neocomplete#sources#omni#input_patterns')
-  let g:neocomplete#sources#omni#input_patterns = {}
-endif
-let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
-let g:neocomplete#sources#omni#input_patterns.javascript = '\h\w*\|[^. \t]\.\w*'
-
-"let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
-"let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
 
 nmap <silent> <C-D> :NERDTreeToggle<CR>
 nmap <silent> - :NERDTreeFind <CR>
@@ -348,6 +323,19 @@ let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 nnoremap <c-]> g<c-]>
 vnoremap <c-]> g<c-]>
 
-" Neomake
-autocmd! BufWritePost * Neomake
-" let g:neomake_javascript_enabled_makers = ['eslint']
+" Deoplete autocompletion
+let g:deoplete#enable_at_startup = 1
+
+let g:deoplete#omni#functions = {}
+let g:deoplete#omni#functions.javascript = [
+  \ 'tern#Complete',
+  \ 'jspc#omni'
+\]
+
+" enable ncm2 for all buffers
+" autocmd BufEnter * call ncm2#enable_for_buffer()
+
+" IMPORTANTE: :help Ncm2PopupOpen for more information
+" set completeopt=noinsert,menuone,noselect
+
+let g:echodoc_enable_at_startup = 1
