@@ -261,7 +261,7 @@ func! WordProcessorMode()
 endfu 
 com! WP call WordProcessorMode()
 
-terns = ['fugitive://.*']
+let g:EditorConfig_exclude_patterns = ['fugitive://.*']
 
 " Recommended key-mappings.
 " <CR>: close popup and save indent.
