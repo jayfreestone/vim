@@ -48,18 +48,9 @@ Plug 'rakr/vim-one'
 Plug 'w0ng/vim-hybrid'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'w0rp/ale'
-Plug 'Shougo/echodoc.vim'
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'ternjs/tern_for_vim', { 'for': ['javascript', 'javascript.jsx'], 'do': function('BuildTern') }
-Plug 'carlitux/deoplete-ternjs', { 'for': ['javascript', 'javascript.jsx'] }
-Plug 'padawan-php/deoplete-padawan', { 'do': 'composer install' }
-" Plug 'ncm2/ncm2'
-" Plug 'roxma/nvim-yarp'
-" Plug 'ncm2/ncm2-bufword'
-" Plug 'ncm2/ncm2-path'
-" Plug 'ncm2/ncm2-tern'
-" Plug 'phpactor/phpactor' ,  {'do': 'composer install', 'for': 'php'}
-" Plug 'phpactor/ncm2-phpactor'
+Plug 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh'}
+Plug 'itchyny/lightline.vim'
 
 if has("gui_running")
   Plug 'ctrlpvim/ctrlp.vim'
@@ -77,7 +68,6 @@ set termguicolors
 
 " Enable mouse support
 set mouse=n
-"set ttymouse=xterm2
 
 set cmdheight=2
 
@@ -271,32 +261,7 @@ func! WordProcessorMode()
 endfu 
 com! WP call WordProcessorMode()
 
-"set JS jump to definition to use ternjs
-autocmd filetype javascript nmap <silent> gd :TernDef<CR>
-autocmd filetype javascript nmap <silent> gD :TernDef<CR>
-
-" Set up tern mapping
-let g:tern_map_keys=1
-let g:tern_map_prefix = '<leader>'
-
-nnoremap <C-g> :GundoToggle<CR>
-
-" allow the . to execute once for each line of a visual selection
-vnoremap . :normal .<CR>
-
-" Console log from insert mode; Puts focus inside parentheses
-imap cll console.log();<Esc>==f(a
-" Console log from visual mode on next line, puts visual selection inside parentheses
-vmap cll yocll<Esc>p
-" Console log from normal mode, inserted on next line with word your on inside parentheses
-nmap cll yiwocll<Esc>p 
-
-set hlsearch
-" Exit out of hlsearch
-nnoremap <esc><esc> :noh<return><esc>
-
-" Ensures Editorconfig works with Fugitive
-let g:EditorConfig_exclude_patterns = ['fugitive://.*']
+terns = ['fugitive://.*']
 
 " Recommended key-mappings.
 " <CR>: close popup and save indent.
@@ -306,14 +271,10 @@ function! s:my_cr_function()
   " For no inserting <CR> key.
   "return pumvisible() ? "\<C-y>" : "\<CR>"
 endfunction
-" <TAB>: completion.
-"inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 
 " Enable omni completion.
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-" autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType javascript setlocal omnifunc=tern#Complete
 autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 
@@ -322,26 +283,43 @@ nmap <silent> - :NERDTreeFind <CR>
 
 " Trigger a quickscope highlight
 let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
-" let g:qs_first_occurrence_highlight_color = '#e3aa83'
-" let g:qs_second_occurrence_highlight_color = '#aebd85'
 
 " Prefer :tjump over :tag
 nnoremap <c-]> g<c-]>
 vnoremap <c-]> g<c-]>
 
-" Deoplete autocompletion
-let g:deoplete#enable_at_startup = 1
+function! CocCurrentFunction()
+    return get(b:, 'coc_current_function', '')
+endfunction
 
-let g:deoplete#omni#functions = {}
-let g:deoplete#omni#functions.javascript = [
-  \ 'tern#Complete',
-  \ 'jspc#omni'
-\]
+let g:lightline = {
+      \ 'colorscheme': 'wombat',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'cocstatus', 'currentfunction', 'readonly', 'filename', 'modified' ] ]
+      \ },
+      \ 'component_function': {
+      \   'cocstatus': 'coc#status',
+      \   'currentfunction': 'CocCurrentFunction'
+      \ },
+      \ }
 
-" enable ncm2 for all buffers
-" autocmd BufEnter * call ncm2#enable_for_buffer()
+" Smaller updatetime for CursorHold & CursorHoldI
+set updatetime=300
 
-" IMPORTANTE: :help Ncm2PopupOpen for more information
-" set completeopt=noinsert,menuone,noselect
+" Remap keys for gotos
+nmap <leader>ld <Plug>(coc-definition)
+nmap <leader>lt <Plug>(coc-type-definition)
+nmap <leader>li <Plug>(coc-implementation)
+nmap <leader>lf <Plug>(coc-references)
 
-let g:echodoc_enable_at_startup = 1
+" Use K for show documentation in preview window
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if &filetype == 'vim'
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
