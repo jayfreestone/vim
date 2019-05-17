@@ -181,6 +181,8 @@ set foldlevel=1         "this is just what i use
 " Make jj do esc"
 inoremap jj <Esc>
 
+nmap <esc><esc> :noh<return>
+
 let g:AutoPairsMultilineClose = 0
 
 " Easymotion Config
