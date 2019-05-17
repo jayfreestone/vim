@@ -213,6 +213,7 @@ set iskeyword+=-
 let g:jsx_ext_required = 1 " Allow JSX in normal JS files"
 
 " UltiSnips settings
+let g:UltiSnipsSnippetDirectories = ['UltiSnips', $HOME.'/.vim/UltiSnips']
 let g:UltiSnipsExpandTrigger="<c-j>"
 
 " Completion
