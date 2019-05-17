@@ -288,6 +288,8 @@ let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 nnoremap <c-]> g<c-]>
 vnoremap <c-]> g<c-]>
 
+let g:coc_global_extensions = ['coc-emoji', 'coc-eslint', 'coc-prettier', 'coc-tsserver','coc-tslint', 'coc-tslint-plugin', 'coc-css', 'coc-json', 'coc-pyls', 'coc-yaml']
+
 function! CocCurrentFunction()
     return get(b:, 'coc_current_function', '')
 endfunction
