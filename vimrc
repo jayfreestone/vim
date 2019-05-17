@@ -41,7 +41,8 @@ Plug 'jeetsukumaran/vim-indentwise'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'ervandew/ag'
 Plug 'mhinz/vim-grepper'
-Plug 'scrooloose/nerdtree'
+Plug 'justinmk/vim-dirvish'
+Plug 'tpope/vim-eunuch'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'justinmk/vim-sneak'
 Plug 'rakr/vim-one'
@@ -205,10 +206,6 @@ nnoremap <S-Tab> <<
 " for insert mode
 inoremap <S-Tab> <C-d>
 
-" Stop NERDTree conflicting with tmux navigator
-let g:NERDTreeMapJumpNextSibling = '<Nop>'
-let g:NERDTreeMapJumpPrevSibling = '<Nop>'
-
 " Considers hyphens to be part of 'words'
 set iskeyword+=-
 
@@ -257,9 +254,6 @@ autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-
-nmap <silent> <C-D> :NERDTreeToggle<CR>
-nmap <silent> - :NERDTreeFind <CR>
 
 " Trigger a quickscope highlight
 let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
