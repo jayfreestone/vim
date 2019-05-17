@@ -75,85 +75,65 @@ set cmdheight=2
 command! -nargs=* -complete=file GG Grepper -tool git -query <args>
 command! -nargs=* Ag Grepper -noprompt -tool ag -grepprg ag --vimgrep <args> %
 
-if has("gui_running")
-  " Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
-  if executable('ag')
-    " Use Ag over Grep
-    set grepprg=ag\ --nogroup\ --nocolor
+" FZF
 
-    " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-    let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+" Gets around FZF overriding Ag command
+let g:fzf_command_prefix = 'Fzf'
 
-    " Only look in current folder
-    let g:ctrlp_working_path_mode = 0
-  endif
-
-  " CtrlP Buffer Search
-  map <C-b> :CtrlPBuffer<CR>
-  map <C-t> :CtrlPBufTag<CR>
-
-  let g:ctrlp_buftag_types = {
-    \ 'coffee': '',
-    \ 'ghmarkdown': '',
-    \ 'go': '',
-    \ 'javascript': '',
-    \ 'markdown': '',
-    \ 'scss': ''
-    \ }
-else
-  " FZF {{{
-  " <C-p> or <C-t> to search files
-  " nnoremap <silent> <C-p> :FZF -m<cr>
-  
-  " Gets around FZF overriding Ag command
-  let g:fzf_command_prefix = 'Fzf'
-
-  nnoremap <silent> <C-p> :call fzf#vim#files('',
-        \ {'source': 'ag --hidden --ignore .git -f -g ""', 'down': '40%'})<cr>
-
-  " <Ctrl-b> for open buffers
-  nnoremap <silent> <C-b> :FzfBuffers<cr>
-
-  " <Ctrl-b> for open buffers
-  nnoremap <silent> <C-b> :FzfBuffers<cr>
-	
-  " <Ctrl-t> for buffer tags
-  nnoremap <silent> <C-t> :FzfBTags<cr>
-
-  " <M-S-p> for MRU
-  nnoremap <silent> <M-S-p> :History<cr>
-
-  " Ctag search
-  function! s:tags_sink(line)
-    let parts = split(a:line, '\t\zs')
-    let excmd = matchstr(parts[2:], '^.*\ze;"\t')
-    execute 'silent e' parts[1][:-2]
-    let [magic, &magic] = [&magic, 0]
-    execute excmd
-    let &magic = magic
-  endfunction
-
-  function! s:tags()
-    if empty(tagfiles())
-      echohl WarningMsg
-      echom 'Preparing tags'
-      echohl None
-      call system('ctags -R')
-    endif
-
-    call fzf#run({
-	  \ 'source':  'cat '.join(map(tagfiles(), 'fnamemodify(v:val, ":S")')).
-	  \            '| grep -v ^!',
-	  \ 'options': '+m -d "\t" --with-nth 1,4.. -n 1 --tiebreak=index',
-	  \ 'down':    '40%',
-	  \ 'sink':    function('s:tags_sink')})
-  endfunction
-
-  command! Tags call s:tags()
-
-  command! -bang -nargs=* Ack call fzf#vim#ag(<q-args>, {'down': '40%', 'options': --no-color'})
-  " }}}
+if executable('rg')
+  set grepprg=rg\ --color=never
+  let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
+  let g:ctrlp_use_caching = 0
 endif
+
+nnoremap <silent> <C-p> :call fzf#vim#files('',
+    \ {'down': '40%'})<cr>
+
+" nnoremap <silent> <C-p> :call fzf#vim#files('',
+"       \ {'source': 'rg --files --hidden --ignore .git""', 'down': '40%'})<cr>
+
+" <Ctrl-b> for open buffers
+nnoremap <silent> <C-b> :FzfBuffers<cr>
+
+" <Ctrl-b> for open buffers
+nnoremap <silent> <C-b> :FzfBuffers<cr>
+
+" <Ctrl-t> for buffer tags
+nnoremap <silent> <C-t> :FzfBTags<cr>
+
+" <M-S-p> for MRU
+nnoremap <silent> <M-S-p> :History<cr>
+
+" Ctag search
+function! s:tags_sink(line)
+let parts = split(a:line, '\t\zs')
+let excmd = matchstr(parts[2:], '^.*\ze;"\t')
+execute 'silent e' parts[1][:-2]
+let [magic, &magic] = [&magic, 0]
+execute excmd
+let &magic = magic
+endfunction
+
+function! s:tags()
+if empty(tagfiles())
+  echohl WarningMsg
+  echom 'Preparing tags'
+  echohl None
+  call system('ctags -R')
+endif
+
+call fzf#run({
+  \ 'source':  'cat '.join(map(tagfiles(), 'fnamemodify(v:val, ":S")')).
+  \            '| grep -v ^!',
+  \ 'options': '+m -d "\t" --with-nth 1,4.. -n 1 --tiebreak=index',
+  \ 'down':    '40%',
+  \ 'sink':    function('s:tags_sink')})
+endfunction
+
+command! Tags call s:tags()
+
+command! -bang -nargs=* Ack call fzf#vim#ag(<q-args>, {'down': '40%', 'options': --no-color'})
+" }}}
 
 " Color Scheme
 set background=dark
