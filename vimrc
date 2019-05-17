@@ -308,10 +308,10 @@ let g:lightline = {
 set updatetime=300
 
 " Remap keys for gotos
-nmap <leader>ld <Plug>(coc-definition)
-nmap <leader>lt <Plug>(coc-type-definition)
-nmap <leader>li <Plug>(coc-implementation)
-nmap <leader>lf <Plug>(coc-references)
+nmap <leader>dd <Plug>(coc-definition)
+nmap <leader>dt <Plug>(coc-type-definition)
+nmap <leader>di <Plug>(coc-implementation)
+nmap <leader>dr <Plug>(coc-references)
 
 " Use K for show documentation in preview window
 nnoremap <silent> K :call <SID>show_documentation()<CR>
