@@ -216,6 +216,12 @@ set hidden
 nnoremap <leader>l :bnext<CR>
 nnoremap <leader>h :bprev<CR>
 
+" Enables shift-tab for reverse indenting
+" for command mode
+nnoremap <S-Tab> <<
+" for insert mode
+inoremap <S-Tab> <C-d>
+
 " Stop NERDTree conflicting with tmux navigator
 let g:NERDTreeMapJumpNextSibling = '<Nop>'
 let g:NERDTreeMapJumpPrevSibling = '<Nop>'
