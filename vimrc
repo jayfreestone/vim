@@ -187,6 +187,11 @@ nmap <esc><esc> :noh<return>
 
 let g:AutoPairsMultilineClose = 0
 
+" Fix for iTerm blocking pane movement
+if has('nvim')
+  nnoremap <bs> <C-w>h
+endif
+
 " Easymotion Config
 " <Leader>f{char} to move to {char}
 map  <leader>f <Plug>(easymotion-bd-f)
