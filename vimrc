@@ -41,7 +41,6 @@ Plug 'jeetsukumaran/vim-indentwise'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'ervandew/ag'
 Plug 'mhinz/vim-grepper'
-Plug 'justinmk/vim-dirvish'
 Plug 'tpope/vim-eunuch'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'justinmk/vim-sneak'
@@ -53,6 +52,7 @@ Plug 'ternjs/tern_for_vim', { 'for': ['javascript', 'javascript.jsx'], 'do': fun
 Plug 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh'}
 Plug 'liuchengxu/vista.vim'
 Plug 'itchyny/lightline.vim'
+Plug 'tpope/vim-vinegar'
 
 if has("gui_running")
   Plug 'ctrlpvim/ctrlp.vim'
