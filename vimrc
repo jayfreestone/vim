@@ -52,6 +52,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'liuchengxu/vista.vim'
 Plug 'itchyny/lightline.vim'
 Plug 'tpope/vim-vinegar'
+Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
 Plug 'prettier/vim-prettier', {
             \ 'do': 'yarn install',
             \ 'branch': 'release/0.x'
