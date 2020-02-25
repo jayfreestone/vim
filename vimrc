@@ -29,6 +29,7 @@ Plug 'othree/html5.vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'sheerun/vim-polyglot'
 Plug 'easymotion/vim-easymotion'
+Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'w0ng/vim-hybrid'
 Plug 'tmhedberg/matchit'
 Plug 'airblade/vim-gitgutter'
@@ -68,6 +69,7 @@ call plug#end()
 let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
 let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 
+" True colors support
 set termguicolors
 
 " Enable mouse support
@@ -139,9 +141,7 @@ command! -bang -nargs=* Ack call fzf#vim#ag(<q-args>, {'down': '40%', 'options':
 
 " Color Scheme
 set background=dark
-let g:hybrid_custom_term_colors = 1
-let g:hybrid_reduced_contrast = 1
-colorscheme hybrid
+colorscheme dracula
 
 " Start EasyAlign
 " map <C-a> :EasyAlign<CR>
