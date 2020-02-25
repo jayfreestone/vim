@@ -1,4 +1,6 @@
 set surround
+set commentary
+set multiple-cursors
 set incsearch
 set ignorecase
 set smartcase
@@ -10,7 +12,8 @@ nnoremap <leader>l gt
 nnoremap <leader>h gT
 
 " Acejump
-map <leader>f :action AceAction<CR>
+set easymotion
+let g:EasyMotion_re_anywhere = 1
 
 " 'Buffer' style
 map <C-b> :action RecentChangedFiles<CR>
