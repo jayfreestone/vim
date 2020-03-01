@@ -57,6 +57,8 @@ Plug 'prettier/vim-prettier', {
             \ 'do': 'yarn install',
             \ 'branch': 'release/0.x'
             \ }
+"Plug 'godlygeek/tabular'
+"Plug 'plasticboy/vim-markdown'
 
 if has("gui_running")
     Plug 'ctrlpvim/ctrlp.vim'
@@ -247,6 +249,18 @@ func! WordProcessorMode()
     setlocal linebreak 
 endfu 
 com! WP call WordProcessorMode()
+
+" Automatic WordProcessorMode for Markdown files
+autocmd BufNewFile,BufRead *.md call Markdown()
+
+function Markdown()
+    " Go to file for wiki links in markdown files
+    set suffixesadd=.md
+    call WordProcessorMode()
+endfunction
+
+" Zettelkasten file creation
+command! -nargs=* Zet call local#zettel#edit(<f-args>)
 
 let g:EditorConfig_exclude_patterns = ['fugitive://.*']
 
