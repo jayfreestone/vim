@@ -1,6 +1,8 @@
+set sneak
 set surround
 set commentary
 set multiple-cursors
+set NERDTree
 set incsearch
 set ignorecase
 set smartcase
@@ -19,7 +21,7 @@ let g:EasyMotion_re_anywhere = 1
 map <C-b> :action RecentChangedFiles<CR>
 
 " File structure
-map - :action SelectInProjectView<CR>
+map - :NERDTreeFind<CR>
 
 " Use ctrl-[hjkl] to select the active split
 map <C-k> <C-W>k
@@ -32,4 +34,21 @@ map mm :action ToggleBookmark<CR>
 map mn :action GotoNextBookmark<CR>
 map mp :action GotoPreviousBookmark<CR>
 
+" Refactoring
+map <leader>r :action RenameElement<CR>
+map <leader>u :action ShowUsages<CR>
+
+" Debugging
+map <C-r> :action Run<CR>
+map <C-d> :action Debug<CR>
+map <C-c> :action Stop<CR>
+
+" Navigation
+nnoremap <C-o> :action Back<CR>
+nnoremap <C-i> :action Forward<CR>
+
 nnoremap % :action EditorMatchBrace<CR>
+
+" History
+xnoremap <leader>h :action Vcs.ShowHistoryForBlock<CR>
+
