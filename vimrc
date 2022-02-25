@@ -21,7 +21,6 @@ Plug 'ap/vim-buftabline'
 Plug 'tomtom/tcomment_vim'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
-Plug 'SirVer/ultisnips'
 Plug 'mattn/emmet-vim'
 Plug 'tpope/vim-surround'
 Plug 'MattesGroeger/vim-bookmarks'
@@ -47,25 +46,11 @@ Plug 'justinmk/vim-sneak'
 Plug 'rakr/vim-one'
 Plug 'w0ng/vim-hybrid'
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'w0rp/ale'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'liuchengxu/vista.vim'
 Plug 'itchyny/lightline.vim'
 Plug 'tpope/vim-vinegar'
-Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
-Plug 'prettier/vim-prettier', {
-            \ 'do': 'yarn install',
-            \ 'branch': 'release/0.x'
-            \ }
-"Plug 'godlygeek/tabular'
-"Plug 'plasticboy/vim-markdown'
 
-if has("gui_running")
-    Plug 'ctrlpvim/ctrlp.vim'
-else
-    Plug '/usr/local/opt/fzf'
-    Plug 'junegunn/fzf.vim'
-endif
+Plug 'junegunn/fzf.vim'
 
 call plug#end()
 
@@ -114,43 +99,9 @@ nnoremap <silent> <C-b> :FzfBuffers<cr>
 " <Ctrl-t> for buffer tags
 nnoremap <silent> <C-t> :FzfBTags<cr>
 
-" Ctag search
-function! s:tags_sink(line)
-    let parts = split(a:line, '\t\zs')
-    let excmd = matchstr(parts[2:], '^.*\ze;"\t')
-    execute 'silent e' parts[1][:-2]
-    let [magic, &magic] = [&magic, 0]
-    execute excmd
-    let &magic = magic
-endfunction
-
-function! s:tags()
-    if empty(tagfiles())
-        echohl WarningMsg
-        echom 'Preparing tags'
-        echohl None
-        call system('ctags -R')
-    endif
-
-    call fzf#run({
-                \ 'source':  'cat '.join(map(tagfiles(), 'fnamemodify(v:val, ":S")')).
-                \            '| grep -v ^!',
-                \ 'options': '+m -d "\t" --with-nth 1,4.. -n 1 --tiebreak=index',
-                \ 'down':    '40%',
-                \ 'sink':    function('s:tags_sink')})
-endfunction
-
-command! Tags call s:tags()
-
-command! -bang -nargs=* Ack call fzf#vim#ag(<q-args>, {'down': '40%', 'options': --no-color'})
-" }}}
-
 " Color Scheme
 set background=dark
 colorscheme dracula
-
-" Start EasyAlign
-" map <C-a> :EasyAlign<CR>
 
 " Undo persists after closing/re-opening
 set undofile
@@ -173,9 +124,6 @@ set cursorline
 set incsearch  ignorecase  smartcase
 set number
 set laststatus=2
-
-" Look for ctags all to the way up to the root
-set tags+=tags;$HOME
 
 " Folding
 set foldmethod=indent   "fold based on indent
@@ -218,17 +166,10 @@ set iskeyword+=-
 " JSX Syntax Highlighting
 let g:jsx_ext_required = 1 " Allow JSX in normal JS files"
 
-" Setup flow
-let g:javascript_plugin_flow = 1
-
-" UltiSnips settings
-let g:UltiSnipsSnippetDirectories = ['UltiSnips', $HOME.'/.vim/UltiSnips']
-let g:UltiSnipsExpandTrigger="<c-j>"
-
 " Completion
 " Don't select first result
 set completeopt=menuone,longest
-" Don't open the scratch window 
+" Don't open the scratch window
 set completeopt-=preview
 " Adds more sources for word completion
 set complete=.,w,b,u,t,i
@@ -237,33 +178,6 @@ set complete=.,w,b,u,t,i
 let g:gitgutter_map_keys = 0
 " nmap <Leader>gs <Plug>GitGutterStageHunk
 " nmap <Leader>gr <Plug>GitGutterUndoHunk
-
-" WordProcessor Mode for text editing
-func! WordProcessorMode() 
-    setlocal formatoptions=1 
-    setlocal noexpandtab 
-    map j gj 
-    map k gk
-    setlocal spell spelllang=en_us 
-    set thesaurus+=/Users/sbrown/.vim/thesaurus/mthesaur.txt
-    set complete+=s
-    set formatprg=par
-    setlocal wrap 
-    setlocal linebreak 
-endfu 
-com! WP call WordProcessorMode()
-
-" Automatic WordProcessorMode for Markdown files
-autocmd BufNewFile,BufRead *.md call Markdown()
-
-function Markdown()
-    " Go to file for wiki links in markdown files
-    set suffixesadd=.md
-    call WordProcessorMode()
-endfunction
-
-" Zettelkasten file creation
-command! -nargs=* Zet call local#zettel#edit(<f-args>)
 
 let g:EditorConfig_exclude_patterns = ['fugitive://.*']
 
@@ -280,14 +194,6 @@ autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 nnoremap <c-]> g<c-]>
 vnoremap <c-]> g<c-]>
 
-" Setup coc
-let g:coc_global_extensions = ['coc-emoji', 'coc-eslint', 'coc-prettier', 'coc-tsserver', 'coc-tslint', 'coc-tslint-plugin', 'coc-css', 'coc-json', 'coc-pyls', 'coc-yaml']
-
-function! CocCurrentFunction()
-    return get(b:, 'coc_current_function', '')
-endfunction
-
-" Use K for show documentation in preview window
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 inoremap <silent><expr> <c-space> coc#refresh()
 
