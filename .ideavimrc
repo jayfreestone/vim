@@ -6,6 +6,9 @@ set NERDTree
 set incsearch
 set ignorecase
 set smartcase
+set textobj-indent
+set relativenumber
+set ideajoin
 
 let mapleader = ","
 
@@ -14,8 +17,7 @@ nnoremap <leader>l gt
 nnoremap <leader>h gT
 
 " Acejump
-set easymotion
-let g:EasyMotion_re_anywhere = 1
+map <leader><leader>s :action AceAction<CR>
 
 " 'Buffer' style
 map <C-b> :action RecentChangedFiles<CR>
@@ -40,15 +42,26 @@ map <leader>u :action ShowUsages<CR>
 
 " Debugging
 map <C-r> :action Run<CR>
+map <leader>c :action ContextRun<CR>
 map <C-d> :action Debug<CR>
 map <C-c> :action Stop<CR>
 
 " Navigation
-nnoremap <C-o> :action Back<CR>
-nnoremap <C-i> :action Forward<CR>
+map <C-o> <Action>(Back)
+map <C-i> <Action>(Forward)
+nnoremap <leader>b :action JumpToLastWindow<CR>
+" Jump to next/previous error, show error description
+" https://stackoverflow.com/questions/13346245/keyboard-shortcut-to-display-error-in-intellij
+map <leader>e <Action>(ShowErrorDescription)
+
+" Remap escape key
+inoremap jk <Esc>
+vnoremap jk <Esc>
 
 nnoremap % :action EditorMatchBrace<CR>
 
 " History
 xnoremap <leader>h :action Vcs.ShowHistoryForBlock<CR>
 
+" Use the system clipboard
+set clipboard+=unnamed
