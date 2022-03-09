@@ -56,7 +56,6 @@ map <leader>e <Action>(ShowErrorDescription)
 
 " Remap escape key
 inoremap jk <Esc>
-vnoremap jk <Esc>
 
 nnoremap % :action EditorMatchBrace<CR>
 
