@@ -9,6 +9,8 @@ set smartcase
 set textobj-indent
 set relativenumber
 set ideajoin
+set NERDTree
+set easymotion
 
 let mapleader = ","
 
@@ -17,7 +19,7 @@ nnoremap <leader>l gt
 nnoremap <leader>h gT
 
 " Acejump
-map <leader><leader>s :action AceAction<CR>
+" map <leader><leader>s :action AceAction<CR>
 
 " 'Buffer' style
 map <C-b> :action RecentChangedFiles<CR>
@@ -54,8 +56,7 @@ nnoremap <leader>b :action JumpToLastWindow<CR>
 " https://stackoverflow.com/questions/13346245/keyboard-shortcut-to-display-error-in-intellij
 map <leader>e <Action>(ShowErrorDescription)
 
-" Remap escape key
-inoremap jk <Esc>
+" nnoremap <C-x> <C-o> <Action>copilot.requestCompletions
 
 nnoremap % :action EditorMatchBrace<CR>
 
@@ -64,3 +65,15 @@ xnoremap <leader>h :action Vcs.ShowHistoryForBlock<CR>
 
 " Use the system clipboard
 set clipboard+=unnamed
+
+nmap <C-w>\| <Action>(MaximizeEditorInSplit)
+; even though it's the same command map it for muscle memory
+nmap <C-w>= <Action>(MaximizeEditorInSplit)
+
+" Pane resizing
+nmap <C-w><Down> <Action>(StretchSplitToBottom)
+nmap <C-w><Left> <Action>(StretchSplitToLeft)
+nmap <C-w><Right> <Action>(StretchSplitToRight)
+nmap <C-w><Up> <Action>(StretchSplitToTop)
+
+nmap <C-w>e :action org.martica.equality.Equalize<CR>
