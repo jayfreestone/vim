@@ -28,14 +28,12 @@ Plug 'othree/html5.vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'sheerun/vim-polyglot'
 Plug 'easymotion/vim-easymotion'
-Plug 'dracula/vim', { 'as': 'dracula' }
+Plug 'phanviet/vim-monokai-pro'
 Plug 'w0ng/vim-hybrid'
 Plug 'tmhedberg/matchit'
 Plug 'airblade/vim-gitgutter'
 Plug 'sjl/gundo.vim/'
 Plug 'tpope/vim-repeat'
-Plug 'nelsyeung/twig.vim'
-Plug 'tokutake/twig-indent'
 Plug 'michaeljsmith/vim-indent-object'
 Plug 'jeetsukumaran/vim-indentwise'
 Plug 'editorconfig/editorconfig-vim'
@@ -101,7 +99,7 @@ nnoremap <silent> <C-t> :FzfBTags<cr>
 
 " Color Scheme
 set background=dark
-colorscheme dracula
+colorscheme monokai_pro
 
 " Undo persists after closing/re-opening
 set undofile
