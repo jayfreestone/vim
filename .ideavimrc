@@ -48,6 +48,9 @@ map <leader>c :action ContextRun<CR>
 map <C-d> :action Debug<CR>
 map <C-c> :action Stop<CR>
 
+" Run
+map <leader><leader>r :action RunAnything<CR>
+
 " Navigation
 map <C-o> <Action>(Back)
 map <C-i> <Action>(Forward)
@@ -61,10 +64,13 @@ map <leader>e <Action>(ShowErrorDescription)
 nnoremap % :action EditorMatchBrace<CR>
 
 " History
-xnoremap <leader>h :action Vcs.ShowHistoryForBlock<CR>
+xnoremap <leader><leader>h :action Vcs.ShowHistoryForBlock<CR>
 
 " Use the system clipboard
 set clipboard+=unnamed
+
+" Copilot
+imap <C-c> <Action>(copilot.requestCompletions)
 
 nmap <C-w>\| <Action>(MaximizeEditorInSplit)
 ; even though it's the same command map it for muscle memory
@@ -75,5 +81,6 @@ nmap <C-w><Down> <Action>(StretchSplitToBottom)
 nmap <C-w><Left> <Action>(StretchSplitToLeft)
 nmap <C-w><Right> <Action>(StretchSplitToRight)
 nmap <C-w><Up> <Action>(StretchSplitToTop)
+nmap gi <Action>(GotoImplementation)
 
 nmap <C-w>e :action org.martica.equality.Equalize<CR>
